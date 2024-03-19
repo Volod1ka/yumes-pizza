@@ -1,0 +1,7 @@
+export { default as LayoutPage } from './Layout'
+export { default as SignInPage } from './auth/SignIn'
+export { default as SignUpPage } from './auth/SignUp'
+export { default as CartPage } from './cart'
+export { default as OrderCheckoutedPage } from './cart/OrderCheckouted'
+export { default as CategoryPage } from './main/Category'
+export { default as HomePage } from './main/Home'

@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "ignoreDeprecations": "5.0",
+    "importsNotUsedAsValues": "error",
+    "noPropertyAccessFromIndexSignature": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": ["node"],
+    "baseUrl": "src",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@mocks": ["mocks/index"],
+      "@mocks/*": ["mocks/*"],
+      "@models/*": ["common/models/*"],
+      "@routes": ["routes/index"],
+      "@routes/*": ["routes/*"],
+      "@stores": ["common/stores/index"],
+      "@stores/*": ["common/stores/*"],
+      "@tools/*": ["common/tools/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
