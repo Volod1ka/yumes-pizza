@@ -8,6 +8,7 @@ import {
   CategoryPage,
   HomePage,
   LayoutPage,
+  NotFoundPage,
   OrderCheckoutedPage,
   SignInPage,
   SignUpPage,
@@ -28,15 +29,9 @@ const router = createBrowserRouter(
           element={<OrderCheckoutedPage />}
         />
       </Route>
-      // TODO: create not found page
-      <Route
-        path={NAVIGATION_ROUTES.notFound}
-        element={<div>Not found page</div>}
-      />
+      <Route path={NAVIGATION_ROUTES.notFound} element={<NotFoundPage />} />
     </Route>,
   ),
 )
 
-// TODO
-//  <NotFoundPage />
 export default router

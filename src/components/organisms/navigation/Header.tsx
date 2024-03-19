@@ -8,8 +8,8 @@ export const setNavStateStyle = (isActive: boolean) =>
 const Header = () => {
   return (
     <header className="sticky top-0 z-50">
-      <div className="flex px-10 py-12 items-center bg-white">
-        <div className="flex-1" />
+      <div className="flex px-10 py-12 max-sm:px-5 items-center bg-white">
+        <div className="flex-1 max-sm:hidden" />
 
         <div className="shrink-0 justify-center">
           <NavLink to={NAVIGATION_ROUTES.home}>

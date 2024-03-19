@@ -3,7 +3,7 @@ import { ContactDetails } from '@components/molecules'
 const Footer = () => {
   return (
     <footer>
-      <div className="flex flex-col mt-auto px-10 pt-10 pb-4 bg-white border-t-2 border-t-light_gray">
+      <div className="flex flex-col mt-auto px-10 pt-10 max-sm:px-5 pb-4 bg-white border-t-2 border-t-light_gray">
         <div className="flex">
           <ContactDetails
             className="flex-1"
@@ -26,7 +26,7 @@ const Footer = () => {
         </div>
 
         <div className="flex pt-9 items-center">
-          <div className="flex flex-1 max-sm:hidden" />
+          <div className="flex-1 max-sm:hidden" />
 
           <div className="shrink-0 justify-center">
             <p className="text-caption text-dark_gray text-center">
