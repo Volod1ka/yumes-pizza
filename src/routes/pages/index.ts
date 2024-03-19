@@ -1,4 +1,5 @@
 export { default as LayoutPage } from './Layout'
+export { default as NotFoundPage } from './NotFound'
 export { default as SignInPage } from './auth/SignIn'
 export { default as SignUpPage } from './auth/SignUp'
 export { default as CartPage } from './cart'
