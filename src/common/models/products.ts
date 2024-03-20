@@ -12,3 +12,8 @@ export type Price = {
   withsale: number | null
   sale: number | null
 }
+
+export type Category = {
+  id: string
+  name: string
+}

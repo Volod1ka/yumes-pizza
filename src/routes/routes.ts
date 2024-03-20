@@ -1,7 +1,7 @@
 export const NAVIGATION_ROUTES = {
   home: '/',
   category: (categoryId: string | null = null) =>
-    categoryId ? `/category/:${categoryId}` : '/category',
+    categoryId ? `/category/${categoryId}` : '/category',
   search: '/search',
   // auth
   singIn: '/signIn',
