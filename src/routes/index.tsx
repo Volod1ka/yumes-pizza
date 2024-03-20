@@ -6,6 +6,7 @@ import {
 import {
   CartPage,
   CategoryPage,
+  ErrorPage,
   HomePage,
   LayoutPage,
   NotFoundPage,
@@ -17,7 +18,11 @@ import { NAVIGATION_ROUTES } from './routes'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path={NAVIGATION_ROUTES.home} element={<LayoutPage />}>
+    <Route
+      path={NAVIGATION_ROUTES.home}
+      element={<LayoutPage />}
+      errorElement={<ErrorPage />}
+    >
       <Route index element={<HomePage />} />
       <Route path={NAVIGATION_ROUTES.singIn} element={<SignInPage />} />
       <Route path={NAVIGATION_ROUTES.signUp} element={<SignUpPage />} />

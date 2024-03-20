@@ -1,7 +1,7 @@
 import { Animation } from '@components/atoms'
 import { Button } from '@components/molecules/buttons'
 import { NAVIGATION_ROUTES } from '@routes/routes'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 // TODO remove
 const ORDER_ID: string = '1234'
@@ -11,10 +11,7 @@ const OrderCheckoutedPage = () => {
   const { idOrder } = useParams<{ idOrder: string }>()
 
   if (idOrder !== ORDER_ID) {
-    // TODO
-    // navigation(NAVIGATION_ROUTES.cart, { replace: true })
-
-    return <div>Hmm...</div>
+    return <Navigate to={NAVIGATION_ROUTES.cart} replace />
   }
 
   return (

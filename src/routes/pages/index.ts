@@ -1,3 +1,4 @@
+export { default as ErrorPage } from './Error'
 export { default as LayoutPage } from './Layout'
 export { default as NotFoundPage } from './NotFound'
 export { default as SignInPage } from './auth/SignIn'
