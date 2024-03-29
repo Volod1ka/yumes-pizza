@@ -8,8 +8,8 @@ export const setNavStateStyle = (isActive: boolean) =>
 const Header = () => {
   return (
     <header className="sticky top-0 z-50">
-      <div className="flex px-10 py-12 max-sm:px-5 items-center bg-white">
-        <div className="flex-1 max-sm:hidden" />
+      <div className="flex px-10 py-12 max-lg:px-5 items-center bg-white max-w-[1440px] mx-auto">
+        <div className="flex-1 max-lg:hidden" />
 
         <div className="shrink-0 justify-center">
           <NavLink to={NAVIGATION_ROUTES.home}>
@@ -17,7 +17,7 @@ const Header = () => {
           </NavLink>
         </div>
 
-        <div className="flex flex-1 gap-5 justify-end">
+        <div className="flex flex-1 gap-5 justify-end max-sm:hidden">
           <NavLink to={NAVIGATION_ROUTES.cart}>
             {({ isActive }) => (
               <CartButton className={setNavStateStyle(isActive)} />

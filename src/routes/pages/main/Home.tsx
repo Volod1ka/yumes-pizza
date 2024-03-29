@@ -1,5 +1,5 @@
-import { CategoryPills } from '@components/organisms'
-import { MOCK_FOOD_CATEGORIES } from '@mocks'
+import { CategoryPills, NewsSwiper } from '@components/organisms'
+import { MOCK_FOOD_CATEGORIES, MOCK_NEWS } from '@mocks'
 import type { Category } from '@models/products'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import { useState } from 'react'
@@ -17,8 +17,8 @@ const HomePage = () => {
   }
 
   return (
-    <div className="flex flex-col px-[115px] max-sm:px-5">
-      <div className="sticky top-0">
+    <div className="flex flex-col">
+      <div className="sticky top-0 px-5 max-lg:px-0">
         <CategoryPills
           categories={MOCK_FOOD_CATEGORIES}
           selectedCategoryId={category}
@@ -26,27 +26,9 @@ const HomePage = () => {
         />
       </div>
 
-      {
-        // TODO maybe for news carousel
-        /* <Slider
-        arrows
-        adaptiveHeight
-        draggable
-        slidesToShow={10}
-        slidesToScroll={2}
-        infinite={false}
-        className="bg-darked_red"
-      >
-        {MOCK_FOOD_CATEGORIES.map(category => (
-          <CategoryItem
-            category={category}
-            selected={categorie === category.id}
-            key={category.id}
-            onSelect={() => setCategorie(category.id)}
-          />
-        ))}
-      </Slider> */
-      }
+      {MOCK_NEWS.length > 0 && (
+        <NewsSwiper className="pt-[30px]" news={MOCK_NEWS} />
+      )}
     </div>
   )
 }

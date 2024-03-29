@@ -73,7 +73,7 @@ const CategoryPills = ({
           <IconButton
             icon="PrevIcon"
             border="default"
-            className=" pointer-events-auto"
+            className="pointer-events-auto"
             onClick={() => onPressArrow('left')}
           />
         </div>
