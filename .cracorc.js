@@ -1,6 +1,5 @@
 const path = require('path')
 
-// eslint-disable-next-line no-undef
 const resolvePath = alias => path.resolve(__dirname, `src/${alias}`)
 
 module.exports = {

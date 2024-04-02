@@ -1,19 +1,22 @@
 import { CategoryPills, NewsSwiper } from '@components/organisms'
 import { MOCK_FOOD_CATEGORIES, MOCK_NEWS } from '@mocks'
 import type { Category } from '@models/products'
-import { NAVIGATION_ROUTES } from '@routes/routes'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { updateCategory } from '@stores/features/categorySlice'
+import { useStoreDispatch, useStoreSelector } from '@stores/store'
+// import { NAVIGATION_ROUTES } from '@routes/routes'
+// import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
-  const navigation = useNavigate()
-
-  // TODO move it to redux
-  const [category, setCategory] = useState<string | null>(null)
+  // const navigation = useNavigate()
+  const selectedCategory = useStoreSelector(
+    state => state.category.selectedCategory,
+  )
+  const dispatch = useStoreDispatch()
 
   const onPressCategory = ({ id }: Category) => {
-    setCategory(id)
-    navigation(NAVIGATION_ROUTES.category(id))
+    dispatch(updateCategory({ selectedCategory: id }))
+    // TODO
+    // navigation(NAVIGATION_ROUTES.category(id))
   }
 
   return (
@@ -21,7 +24,7 @@ const HomePage = () => {
       <div className="sticky top-0 px-5 max-lg:px-0">
         <CategoryPills
           categories={MOCK_FOOD_CATEGORIES}
-          selectedCategoryId={category}
+          selectedCategoryId={selectedCategory}
           onSelect={onPressCategory}
         />
       </div>

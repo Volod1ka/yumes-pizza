@@ -30,7 +30,6 @@
       "@models/*": ["common/models/*"],
       "@routes": ["routes/index"],
       "@routes/*": ["routes/*"],
-      "@stores": ["common/stores/index"],
       "@stores/*": ["common/stores/*"],
       "@tools/*": ["common/tools/*"]
     }
