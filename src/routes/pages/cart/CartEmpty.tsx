@@ -7,7 +7,7 @@ const CartEmptyPage = () => {
   const navigation = useNavigate()
 
   return (
-    <div className="flex flex-1 items-center justify-center">
+    <div className="flex h-full items-center justify-center">
       <div className="flex flex-col pb-3 items-center">
         <Animation name="PackingLottie" height={250} />
 

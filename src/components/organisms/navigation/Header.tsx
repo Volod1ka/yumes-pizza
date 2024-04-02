@@ -8,7 +8,7 @@ export const setNavStateStyle = (isActive: boolean) =>
 const Header = () => {
   return (
     <header className="sticky top-0 z-50">
-      <div className="flex px-10 py-12 max-lg:px-5 items-center bg-white max-w-[1440px] mx-auto">
+      <div className="flex px-10 py-7 max-lg:px-5 items-center bg-white max-w-[1440px] mx-auto">
         <div className="flex-1 max-lg:hidden" />
 
         <div className="shrink-0 justify-center">

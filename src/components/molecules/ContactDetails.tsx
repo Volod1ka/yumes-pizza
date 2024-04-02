@@ -19,7 +19,11 @@ const descriptionRender = ({
     return description
   }
 
-  return description.map(line => <span className="block">{line}</span>)
+  return description.map((line, index) => (
+    <span key={`desc-${index}`} className="block">
+      {line}
+    </span>
+  ))
 }
 
 const ContactDetails = ({

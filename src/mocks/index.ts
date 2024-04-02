@@ -1,20 +1,20 @@
+import { faker } from '@faker-js/faker'
 import type { News } from '@models/news'
 import type { Category, CategoryListItem, Product } from '@models/products'
 
-export const MOCK_PRODUCT = {
-  id: 'dsfs4g4g54g4',
+export const createMockProduct = (): Product => ({
+  id: faker.string.uuid(),
   image:
     'https://www.seriouseats.com/thmb/e16lLOoVEix_JZTv7iNyAuWkPn8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__09__20140918-jamie-olivers-comfort-food-insanity-burger-david-loftus-f7d9042bdc2a468fbbd50b10d467dafd.jpg',
   name: 'The Classic Burger',
-  stock: Math.random() * 30 + 1,
+  stock: faker.number.int({ min: 1, max: 30 }),
   price: {
     full: 420,
     sale: 20,
     withsale: 320,
   },
-  description:
-    'Indulge in the ultimate burger experience with our mouthwatering  creation! Sink your teeth into a juicy patty made from the finest cuts  of beef, perfectly seasoned and grilled to perfection. Topped with  fresh, crisp lettuce, ripe tomatoes, and savory pickles, each bite is a  burst of flavor. Drizzled with our signature sauce and nestled in a  soft, toasted bun, this burger is sure to satisfy your cravings. Order  now and treat yourself to a burger like no other!',
-} satisfies Product
+  description: faker.lorem.lines({ min: 1, max: 7 }),
+})
 
 export const MOCK_FOOD_CATEGORIES = [
   { id: '1', name: 'Fruits' },
@@ -84,8 +84,8 @@ export const MOCK_NEWS = [
 export const MOCK_PRODUCT_WITH_CATEGORIES = MOCK_FOOD_CATEGORIES.map(
   category => ({
     ...category,
-    products: Array.from<Product>({
-      length: Math.random() * 11 + 1,
-    }).fill(MOCK_PRODUCT),
+    products: faker.helpers.multiple(createMockProduct, {
+      count: faker.number.int({ min: 2, max: 12 }),
+    }),
   }),
 ) satisfies CategoryListItem[]

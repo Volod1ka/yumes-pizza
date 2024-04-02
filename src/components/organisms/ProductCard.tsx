@@ -23,7 +23,7 @@ const ProductCard = ({
   className,
 }: ProductCardProps) => {
   return (
-    <div className={twMerge('min-w-[230px]', className)}>
+    <div className={twMerge('flex flex-col min-w-[230px]', className)}>
       <div className="relative mb-5 rounded-[20px] overflow-hidden">
         <img className="object-cover" src={image} alt={name} />
 
@@ -42,7 +42,7 @@ const ProductCard = ({
         </p>
       )}
 
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row mt-auto justify-between items-center">
         <Price
           price={price.withsale || price.full}
           crossed={price.withsale ? price.full : undefined}

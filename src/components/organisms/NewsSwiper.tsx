@@ -19,7 +19,7 @@ export type NewsSwiperProps = Pick<
 const NewsSwiper = ({ news, className }: NewsSwiperProps) => {
   return (
     <div className={twMerge(className, 'relative')}>
-      <div className="z-10 absolute top-0 flex h-full w-1/6 from-white from-30%% to-transparent bg-gradient-to-r pointer-events-none" />
+      <div className="z-10 absolute top-0 flex h-full w-1/6 from-white from-30% to-transparent bg-gradient-to-r pointer-events-none" />
       <div className="z-10 absolute top-0 right-0 flex h-full w-1/6 from-white from-30% to-transparent bg-gradient-to-l pointer-events-none" />
 
       <Swiper

@@ -27,8 +27,9 @@ const HomePage = () => {
     // navigateToCategory(id)
   }
 
+  // from-white from-75% to-transparent bg-gradient-to-b z-50
   return (
-    <div className="flex flex-col">
+    <>
       <div className="sticky top-0 px-[114px] max-lg:px-0">
         <CategoryPills
           categories={MOCK_FOOD_CATEGORIES}
@@ -46,7 +47,7 @@ const HomePage = () => {
         onPressMore={navigateToCategory}
         withMore
       />
-    </div>
+    </>
   )
 }
 

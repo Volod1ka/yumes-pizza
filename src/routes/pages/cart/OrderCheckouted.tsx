@@ -15,8 +15,8 @@ const OrderCheckoutedPage = () => {
   }
 
   return (
-    <div className="flex flex-1 items-center justify-center">
-      <div className="flex flex-col pb-3 mb-20 items-center">
+    <div className="flex h-full items-center justify-center">
+      <div className="flex flex-col my-auto pb-3 items-center">
         <Animation name="CartDoneLottie" height={125} loop={false} />
 
         <div className="flex flex-col py-14 gap-4">

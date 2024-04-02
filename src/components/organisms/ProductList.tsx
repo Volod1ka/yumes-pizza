@@ -1,5 +1,6 @@
 import { CategoryLine } from '@components/molecules'
 import type { CategoryListItem } from '@models/products'
+import React from 'react'
 import ProductCard from './ProductCard'
 
 export const MAX_PRODUCTS_IN_CATEGORY = 8
@@ -29,7 +30,7 @@ const ProductList = ({
           : products
 
         return (
-          <>
+          <React.Fragment key={`category-${id}`}>
             <CategoryLine
               className="mt-7 mb-4"
               title={name}
@@ -46,13 +47,14 @@ const ProductList = ({
             <div className="grid grid-cols-4 max-2xl:grid-cols-3 max-md:grid-cols-2 max-[510px]:grid-cols-1 gap-[30px]">
               {renderProducts.map(product => (
                 <ProductCard
+                  key={`product-${product.id}`}
                   product={product}
                   count={0}
                   stock={product.stock}
                 />
               ))}
             </div>
-          </>
+          </React.Fragment>
         )
       })}
     </div>
