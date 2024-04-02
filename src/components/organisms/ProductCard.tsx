@@ -23,13 +23,9 @@ const ProductCard = ({
   className,
 }: ProductCardProps) => {
   return (
-    <div className={twMerge('w-[280px]', className)}>
+    <div className={twMerge('min-w-[230px]', className)}>
       <div className="relative mb-5 rounded-[20px] overflow-hidden">
-        <img
-          className="h-[280px] w-[280px] object-cover"
-          src={image}
-          alt={name}
-        />
+        <img className="object-cover" src={image} alt={name} />
 
         {price.sale && (
           <SaleTag

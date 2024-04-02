@@ -1,4 +1,5 @@
 export { default as CategoryItem, type CategoryItemProps } from './CategoryItem'
+export { default as CategoryLine, type CategoryLineProps } from './CategoryLine'
 export {
   default as ContactDetails,
   type ContactDetailsProps,

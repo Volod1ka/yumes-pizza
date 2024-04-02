@@ -1,7 +1,7 @@
 import { NewsCard } from '@components/molecules'
 import type { News } from '@models/news'
 import type { AllHTMLAttributes } from 'react'
-import { Autoplay, Mousewheel, Pagination } from 'swiper/modules'
+import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { twMerge } from 'tailwind-merge'
 
@@ -25,7 +25,6 @@ const NewsSwiper = ({ news, className }: NewsSwiperProps) => {
       <Swiper
         centeredSlides
         grabCursor
-        mousewheel
         pagination={{
           clickable: true,
           dynamicBullets: true,
@@ -37,7 +36,7 @@ const NewsSwiper = ({ news, className }: NewsSwiperProps) => {
         autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
         slidesPerView="auto"
         className="w-full"
-        modules={[Autoplay, Mousewheel, Pagination]}
+        modules={[Autoplay, Pagination]}
       >
         {news.map(item => (
           <SwiperSlide

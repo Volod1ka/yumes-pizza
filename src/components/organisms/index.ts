@@ -5,3 +5,4 @@ export {
 } from './CategoryPills'
 export { default as NewsSwiper, type NewsSwiperProps } from './NewsSwiper'
 export { default as ProductCard, type ProductCardProps } from './ProductCard'
+export { default as ProductList, type ProductListProps } from './ProductList'

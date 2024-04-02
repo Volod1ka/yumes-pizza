@@ -1,12 +1,12 @@
 import type { News } from '@models/news'
-import type { Category, Product } from '@models/products'
+import type { Category, CategoryListItem, Product } from '@models/products'
 
 export const MOCK_PRODUCT = {
   id: 'dsfs4g4g54g4',
   image:
     'https://www.seriouseats.com/thmb/e16lLOoVEix_JZTv7iNyAuWkPn8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__09__20140918-jamie-olivers-comfort-food-insanity-burger-david-loftus-f7d9042bdc2a468fbbd50b10d467dafd.jpg',
   name: 'The Classic Burger',
-  stock: 9,
+  stock: Math.random() * 30 + 1,
   price: {
     full: 420,
     sale: 20,
@@ -80,3 +80,12 @@ export const MOCK_NEWS = [
       'https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg',
   },
 ] satisfies News[]
+
+export const MOCK_PRODUCT_WITH_CATEGORIES = MOCK_FOOD_CATEGORIES.map(
+  category => ({
+    ...category,
+    products: Array.from<Product>({
+      length: Math.random() * 11 + 1,
+    }).fill(MOCK_PRODUCT),
+  }),
+) satisfies CategoryListItem[]
