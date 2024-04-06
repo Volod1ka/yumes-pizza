@@ -24,15 +24,6 @@ const Header = () => {
             )}
           </NavLink>
 
-          <NavLink to={NAVIGATION_ROUTES.search}>
-            {({ isActive }) => (
-              <IconButton
-                icon="SearchIcon"
-                className={setNavStateStyle(isActive)}
-              />
-            )}
-          </NavLink>
-
           <IconButton icon="UserIcon" />
         </div>
       </div>

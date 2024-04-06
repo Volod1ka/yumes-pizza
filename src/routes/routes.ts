@@ -4,7 +4,6 @@ export const NAVIGATION_ROUTES = {
     typeof categoryId === 'string'
       ? `/category/${categoryId}`
       : `/category/:categoryId`,
-  search: '/search',
   // auth
   singIn: '/signIn',
   signUp: '/signUp',
