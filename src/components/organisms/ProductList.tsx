@@ -1,5 +1,6 @@
 import { CategoryLine } from '@components/molecules'
-import type { CategoryListItem } from '@models/products'
+import type { CartProduct } from '@models/cart'
+import type { CategoryListItem, Product } from '@models/products'
 import React from 'react'
 import ProductCard from './ProductCard'
 
@@ -7,15 +8,21 @@ export const MAX_PRODUCTS_IN_CATEGORY = 8
 
 export type ProductListProps = {
   data: CategoryListItem[]
+  selectedData: CartProduct[]
   withMore?: boolean
   maxRenderProducts?: number
+  onAddProduct: (product: Product) => void
+  onSubProduct: (product: Product) => void
   onPressMore?: (categoryId: string) => void
 }
 
 const ProductList = ({
-  data,
+  data = [],
+  selectedData = [],
   withMore = false,
   maxRenderProducts = MAX_PRODUCTS_IN_CATEGORY,
+  onAddProduct,
+  onSubProduct,
   onPressMore,
 }: ProductListProps) => {
   return (
@@ -45,14 +52,22 @@ const ProductList = ({
             />
 
             <div className="grid grid-cols-4 max-2xl:grid-cols-3 max-md:grid-cols-2 max-[510px]:grid-cols-1 gap-[30px]">
-              {renderProducts.map(product => (
-                <ProductCard
-                  key={`product-${product.id}`}
-                  product={product}
-                  count={0}
-                  stock={product.stock}
-                />
-              ))}
+              {renderProducts.map(product => {
+                const selectedProduct = selectedData.find(
+                  item => item.id === product.id,
+                )
+
+                return (
+                  <ProductCard
+                    key={`product-${product.id}`}
+                    product={product}
+                    count={selectedProduct?.count ?? 0}
+                    stock={product.stock}
+                    onAdd={() => onAddProduct(product)}
+                    onSub={() => onSubProduct(product)}
+                  />
+                )
+              })}
             </div>
           </React.Fragment>
         )

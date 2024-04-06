@@ -1,5 +1,5 @@
 import type { AllHTMLAttributes } from 'react'
-import { twMerge, type ClassNameValue } from 'tailwind-merge'
+import { twJoin, type ClassNameValue } from 'tailwind-merge'
 
 export type BadgeProps = Pick<AllHTMLAttributes<HTMLElement>, 'className'> & {
   count: number
@@ -10,7 +10,7 @@ export const badgeStyle: ClassNameValue = [
 ]
 
 const Badge = ({ count, className }: BadgeProps) => (
-  <p className={twMerge(badgeStyle, className)}>{count}</p>
+  <p className={twJoin(badgeStyle, className)}>{count}</p>
 )
 
 export default Badge

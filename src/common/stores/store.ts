@@ -4,11 +4,11 @@ import {
   useSelector,
   type TypedUseSelectorHook,
 } from 'react-redux'
-import categorySlice from './features/categorySlice'
+import cartSlice from './features/cartSlice'
 
 const store = configureStore({
   reducer: combineReducers({
-    category: categorySlice,
+    cart: cartSlice,
   }),
 })
 

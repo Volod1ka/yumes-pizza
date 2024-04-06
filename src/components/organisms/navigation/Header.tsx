@@ -1,11 +1,14 @@
 import { CartButton, IconButton } from '@components/molecules/buttons'
 import { NAVIGATION_ROUTES } from '@routes/routes'
+import { useStoreSelector } from '@stores/store'
 import { NavLink } from 'react-router-dom'
 
 export const setNavStateStyle = (isActive: boolean) =>
   isActive ? 'shadow-md-red' : undefined
 
 const Header = () => {
+  const { products, totalPrice } = useStoreSelector(state => state.cart)
+
   return (
     <header className="sticky top-0 z-50">
       <div className="flex px-10 py-7 max-lg:px-5 items-center bg-white max-w-[1440px] mx-auto">
@@ -20,7 +23,11 @@ const Header = () => {
         <div className="flex flex-1 gap-5 justify-end max-sm:hidden">
           <NavLink to={NAVIGATION_ROUTES.cart}>
             {({ isActive }) => (
-              <CartButton className={setNavStateStyle(isActive)} />
+              <CartButton
+                className={setNavStateStyle(isActive)}
+                totalPrice={totalPrice}
+                count={products.length}
+              />
             )}
           </NavLink>
 

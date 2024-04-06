@@ -12,7 +12,7 @@ export type CartButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export const cartButtonStyle: ClassNameValue = ['flex-row p-2 gap-1 w-auto']
 
 const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
-  ({ className, count, totalPrice, ...props }, ref) => (
+  ({ className, count = 0, totalPrice = 0, ...props }, ref) => (
     <button
       ref={ref}
       className={twMerge(
@@ -24,11 +24,11 @@ const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
     >
       <div className="flex relative">
         <ShoppingBagIcon />
-        {!!count && (
+        {count > 0 && (
           <Badge count={count} className="absolute top-[2px] right-0" />
         )}
       </div>
-      {totalPrice && <Price price={totalPrice} />}
+      {totalPrice > 0 && <Price price={totalPrice} />}
     </button>
   ),
 )
