@@ -1,7 +1,7 @@
 import { Footer, Header } from '@components/organisms/navigation'
 import { Outlet } from 'react-router-dom'
 
-const LayoutPage = () => {
+const MainLayoutPage = () => {
   return (
     <>
       <Header />
@@ -13,4 +13,4 @@ const LayoutPage = () => {
   )
 }
 
-export default LayoutPage
+export default MainLayoutPage

@@ -14,7 +14,7 @@ export type ProductListProps = {
 
 const ProductList = ({
   data,
-  withMore,
+  withMore = false,
   maxRenderProducts = MAX_PRODUCTS_IN_CATEGORY,
   onPressMore,
 }: ProductListProps) => {
@@ -22,7 +22,7 @@ const ProductList = ({
     <div className="flex flex-col pb-36 px-[114px] max-lg:px-5">
       {data.map(({ id, name, products }) => {
         const shownMoreButton =
-          !!withMore &&
+          withMore &&
           (maxRenderProducts ? products.length > maxRenderProducts : true)
 
         const renderProducts = shownMoreButton

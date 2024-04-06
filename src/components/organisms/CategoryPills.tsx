@@ -82,7 +82,7 @@ const CategoryPills = ({
       <ul
         ref={pillListRef}
         onScroll={updateArrowEnabled}
-        className="flex m-0 py-3 gap-5 overflow-x-scroll scroll-smooth scrollbar-thin scrollbar-thumb-dark_red scrollbar-track-light_gray scrollbar-h-1"
+        className="flex m-0 py-3 gap-5 overflow-x-scroll scroll-smooth scrollbar-thin scrollbar-thumb-dark_red scrollbar-track-transparent scrollbar-h-1"
       >
         {categories.map(category => (
           <CategoryItem

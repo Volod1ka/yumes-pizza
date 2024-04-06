@@ -1,46 +1,17 @@
-import { CategoryPills, NewsSwiper, ProductList } from '@components/organisms'
-import {
-  MOCK_FOOD_CATEGORIES,
-  MOCK_NEWS,
-  MOCK_PRODUCT_WITH_CATEGORIES,
-} from '@mocks'
-import type { Category } from '@models/products'
+import { NewsSwiper, ProductList } from '@components/organisms'
+import { MOCK_NEWS, MOCK_PRODUCT_WITH_CATEGORIES } from '@mocks'
 import { NAVIGATION_ROUTES } from '@routes/routes'
-import { updateCategory } from '@stores/features/categorySlice'
-import { useStoreDispatch, useStoreSelector } from '@stores/store'
 import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
   const navigation = useNavigate()
 
-  const dispatch = useStoreDispatch()
-  const selectedCategory = useStoreSelector(
-    state => state.category.selectedCategory,
-  )
-
   const navigateToCategory = (id: string) =>
     navigation(NAVIGATION_ROUTES.category(id))
 
-  const onPressCategory = ({ id }: Category) => {
-    dispatch(updateCategory({ selectedCategory: id }))
-    // TODO
-    // navigateToCategory(id)
-  }
-
-  // from-white from-75% to-transparent bg-gradient-to-b z-50
   return (
     <>
-      <div className="sticky top-0 px-[114px] max-lg:px-0">
-        <CategoryPills
-          categories={MOCK_FOOD_CATEGORIES}
-          selectedCategoryId={selectedCategory}
-          onSelect={onPressCategory}
-        />
-      </div>
-
-      {MOCK_NEWS.length > 0 && (
-        <NewsSwiper className="pt-[30px]" news={MOCK_NEWS} />
-      )}
+      {MOCK_NEWS.length > 0 && <NewsSwiper news={MOCK_NEWS} />}
 
       <ProductList
         data={MOCK_PRODUCT_WITH_CATEGORIES}

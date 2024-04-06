@@ -1,7 +1,9 @@
 export const NAVIGATION_ROUTES = {
   home: '/',
-  category: (categoryId: string | null = null) =>
-    categoryId ? `/category/${categoryId}` : '/category',
+  category: (categoryId?: string) =>
+    typeof categoryId === 'string'
+      ? `/category/${categoryId}`
+      : `/category/:categoryId`,
   search: '/search',
   // auth
   singIn: '/signIn',
@@ -12,3 +14,11 @@ export const NAVIGATION_ROUTES = {
   // else
   notFound: '*',
 } as const
+
+export type CategoryRouteParams = {
+  categoryId: string
+}
+
+export type OrderCheckoutedParams = {
+  idOrder: string
+}

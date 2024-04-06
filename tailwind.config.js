@@ -11,6 +11,7 @@ module.exports = {
       darked_red: '#9B3636',
       light_gray: '#D9D9D9',
       thin_gray: '#B3B3B3',
+      transparent: 'transparent',
       white: '#FFF',
     },
     extend: {

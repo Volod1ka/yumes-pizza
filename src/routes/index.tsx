@@ -1,14 +1,15 @@
 import {
+  Route,
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
 } from 'react-router-dom'
 import {
   CartPage,
+  CategoryLayoutPage,
   CategoryPage,
   ErrorPage,
   HomePage,
-  LayoutPage,
+  MainLayoutPage,
   NotFoundPage,
   OrderCheckoutedPage,
   SignInPage,
@@ -20,13 +21,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       path={NAVIGATION_ROUTES.home}
-      element={<LayoutPage />}
+      element={<MainLayoutPage />}
       errorElement={<ErrorPage />}
     >
-      <Route index element={<HomePage />} />
+      <Route element={<CategoryLayoutPage />}>
+        <Route index element={<HomePage />} />
+        <Route path={NAVIGATION_ROUTES.category()} element={<CategoryPage />} />
+      </Route>
       <Route path={NAVIGATION_ROUTES.singIn} element={<SignInPage />} />
       <Route path={NAVIGATION_ROUTES.signUp} element={<SignUpPage />} />
-      <Route path={NAVIGATION_ROUTES.category()} element={<CategoryPage />} />
       <Route path={NAVIGATION_ROUTES.cart}>
         <Route index element={<CartPage />} />
         <Route
