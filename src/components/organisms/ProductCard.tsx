@@ -27,10 +27,10 @@ const ProductCard = ({
       <div className="relative mb-5 rounded-[20px] overflow-hidden">
         <img className="object-cover" src={image} alt={name} />
 
-        {price.sale && (
+        {price.discount && (
           <SaleTag
             className="absolute top-[10px] right-[10px]"
-            discount={price.sale}
+            discount={price.discount}
           />
         )}
       </div>
@@ -44,8 +44,8 @@ const ProductCard = ({
 
       <div className="flex flex-row mt-auto justify-between items-center">
         <Price
-          price={price.withsale || price.full}
-          crossed={price.withsale ? price.full : undefined}
+          price={price.selling || price.full}
+          crossed={price.selling ? price.full : undefined}
         />
         <CountButton
           count={count}

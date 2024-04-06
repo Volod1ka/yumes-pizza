@@ -46,7 +46,7 @@ const cartSlice = createSlice({
         existingProduct.count = existingProduct.count + 1
       }
 
-      state.totalPrice += product.price.withsale ?? product.price.full
+      state.totalPrice += product.price.selling ?? product.price.full
 
       return state
     },
@@ -67,7 +67,7 @@ const cartSlice = createSlice({
           state.products.splice(existingProductIndex, 1)
         }
 
-        state.totalPrice -= product.price.withsale ?? product.price.full
+        state.totalPrice -= product.price.selling ?? product.price.full
       }
 
       return state

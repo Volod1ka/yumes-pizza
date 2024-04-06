@@ -9,8 +9,8 @@ export type Product = {
 
 export type Price = {
   full: number
-  withsale: number | null
-  sale: number | null
+  selling: number | null
+  discount: number | null
 }
 
 export type Category = {

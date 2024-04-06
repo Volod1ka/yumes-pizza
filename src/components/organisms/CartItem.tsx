@@ -46,8 +46,8 @@ const CartItem = ({
 
       <div className="flex flex-row gap-10 items-center">
         <Price
-          price={price.withsale || price.full}
-          crossed={price.withsale ? price.full : undefined}
+          price={price.selling || price.full}
+          crossed={price.selling ? price.full : undefined}
         />
         <CountButton
           count={count}

@@ -1,20 +1,38 @@
 import { faker } from '@faker-js/faker'
 import type { News } from '@models/news'
-import type { Category, CategoryListItem, Product } from '@models/products'
+import type {
+  Category,
+  CategoryListItem,
+  Price,
+  Product,
+} from '@models/products'
 
-export const createMockProduct = (): Product => ({
-  id: faker.string.uuid(),
-  image:
-    'https://www.seriouseats.com/thmb/e16lLOoVEix_JZTv7iNyAuWkPn8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__09__20140918-jamie-olivers-comfort-food-insanity-burger-david-loftus-f7d9042bdc2a468fbbd50b10d467dafd.jpg',
-  name: 'The Classic Burger',
-  stock: faker.number.int({ min: 1, max: 30 }),
-  price: {
-    full: 420,
-    sale: 20,
-    withsale: 320,
-  },
-  description: faker.lorem.lines({ min: 1, max: 7 }),
-})
+export const createMockProduct = (): Product => {
+  const isSale = !faker.number.int({ min: 0, max: 5 })
+
+  let price: Price = {
+    full: Number(faker.commerce.price({ min: 80, max: 1000, dec: 0 })),
+    discount: null,
+    selling: null,
+  }
+
+  if (isSale) {
+    const discount = faker.number.int({ min: 5, max: 70 })
+    const selling = Math.round(price.full * ((100 - discount) / 100))
+
+    price = { ...price, selling, discount }
+  }
+
+  return {
+    id: faker.string.uuid(),
+    image:
+      'https://www.seriouseats.com/thmb/e16lLOoVEix_JZTv7iNyAuWkPn8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2014__09__20140918-jamie-olivers-comfort-food-insanity-burger-david-loftus-f7d9042bdc2a468fbbd50b10d467dafd.jpg',
+    name: 'The Classic Burger',
+    stock: faker.number.int({ min: 1, max: 30 }),
+    price,
+    description: faker.lorem.lines({ min: 1, max: 7 }),
+  }
+}
 
 export const MOCK_FOOD_CATEGORIES = [
   { id: '1', name: 'Fruits' },
