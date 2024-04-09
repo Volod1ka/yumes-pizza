@@ -1,5 +1,5 @@
-import * as Animations from '../../assets/animations'
-import * as Icons from '../../assets/icons'
+import * as Animations from '@assets/animations'
+import * as Icons from '@assets/icons'
 
 export type IconsName = keyof typeof Icons
 

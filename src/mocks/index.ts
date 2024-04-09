@@ -35,7 +35,7 @@ export const createMockProduct = (): Product => {
 }
 
 export const MOCK_FOOD_CATEGORIES = [
-  { id: '1', name: 'Fruits' },
+  { id: '1', name: 'Burger' },
   { id: '2', name: 'Vegetables' },
   { id: '3', name: 'Meat & Poultry' },
   { id: '4', name: 'Seafood' },
