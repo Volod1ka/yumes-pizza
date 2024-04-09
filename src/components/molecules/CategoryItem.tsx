@@ -1,11 +1,13 @@
 import type { Category } from '@models/products'
-import { twMerge, type ClassNameValue } from 'tailwind-merge'
+import { twJoin, type ClassNameValue } from 'tailwind-merge'
 
 export type CategoryItemProps = {
   category: Category
   selected?: boolean
   onSelect?: (category: Category) => void
 }
+
+export const keyOfCategoryItem = (id: string) => `category-pill-${id}`
 
 export const сategoryItemStyle = (selected: boolean): ClassNameValue => [
   'py-[10px] px-3 rounded-[20px] text-dark_gray cursor-pointer list-none',
@@ -19,7 +21,8 @@ const CategoryItem = ({
 }: CategoryItemProps) => {
   return (
     <li
-      className={twMerge(сategoryItemStyle(selected))}
+      id={keyOfCategoryItem(category.id)}
+      className={twJoin(сategoryItemStyle(selected))}
       onClick={() => onSelect?.(category)}
     >
       <p className="text-heading6 text-center font-bold select-none">

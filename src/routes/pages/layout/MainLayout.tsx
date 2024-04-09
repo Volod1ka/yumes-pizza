@@ -1,7 +1,10 @@
 import { Footer, Header } from '@components/organisms/navigation'
+import { useScrollPageToTop } from '@hooks'
 import { Outlet } from 'react-router-dom'
 
 const MainLayoutPage = () => {
+  useScrollPageToTop()
+
   return (
     <>
       <Header />

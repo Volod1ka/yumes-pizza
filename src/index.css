@@ -13,6 +13,9 @@
   }
 }
 
+.root-div {
+  @apply flex flex-col flex-1
+}
 
 body {
   margin: 0;

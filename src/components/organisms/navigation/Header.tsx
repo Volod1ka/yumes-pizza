@@ -20,7 +20,7 @@ const Header = () => {
           </NavLink>
         </div>
 
-        <div className="flex flex-1 gap-5 justify-end max-sm:hidden">
+        <div className="flex flex-1 gap-5 justify-end">
           <NavLink to={NAVIGATION_ROUTES.cart}>
             {({ isActive }) => (
               <CartButton

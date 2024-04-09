@@ -1,4 +1,6 @@
-import { CategoryItem } from '@components/molecules'
+import CategoryItem, {
+  keyOfCategoryItem,
+} from '@components/molecules/CategoryItem'
 import { IconButton } from '@components/molecules/buttons'
 import type { Category } from '@models/products'
 import { useEffect, useRef, useState } from 'react'
@@ -31,6 +33,16 @@ const CategoryPills = ({
 
   const [prevVisibled, setPrevVisibled] = useState<boolean>(false)
   const [nextVisibled, setNextVisibled] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (selectedCategoryId) {
+      document
+        .querySelector(`#${keyOfCategoryItem(selectedCategoryId)}`)
+        ?.scrollIntoView({ inline: 'center' })
+    } else {
+      pillListRef.current?.scrollTo({ left: 0 })
+    }
+  }, [selectedCategoryId])
 
   useEffect(() => {
     updateArrowEnabled()

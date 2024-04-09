@@ -25,6 +25,8 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@hooks": ["common/hooks/index"],
+      "@hooks/*": ["common/hooks/*"],
       "@mocks": ["mocks/index"],
       "@mocks/*": ["mocks/*"],
       "@models/*": ["common/models/*"],

@@ -7,6 +7,7 @@ module.exports = {
     alias: {
       '@assets': resolvePath('assets'),
       '@components': resolvePath('components'),
+      '@hooks': resolvePath('common/hooks'),
       '@mocks': resolvePath('mocks'),
       '@models': resolvePath('common/models'),
       '@routes': resolvePath('routes'),
