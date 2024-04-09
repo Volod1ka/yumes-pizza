@@ -1,5 +1,6 @@
+import { useNewsQuery } from '@api'
 import { NewsSwiper, ProductList } from '@components/organisms'
-import { MOCK_NEWS, MOCK_PRODUCT_WITH_CATEGORIES } from '@mocks'
+import { MOCK_PRODUCT_WITH_CATEGORIES } from '@mocks'
 import type { Product } from '@models/products'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import { addProduct, subProduct } from '@stores/features/cartSlice'
@@ -11,6 +12,8 @@ const HomePage = () => {
 
   const dispatch = useStoreDispatch()
   const cartProducts = useStoreSelector(state => state.cart.products)
+
+  const newsQuery = useNewsQuery()
 
   const navigateToCategory = (id: string) =>
     navigation(NAVIGATION_ROUTES.category(id))
@@ -25,7 +28,7 @@ const HomePage = () => {
 
   return (
     <>
-      {MOCK_NEWS.length > 0 && <NewsSwiper news={MOCK_NEWS} />}
+      {newsQuery.news.length > 0 && <NewsSwiper news={newsQuery.news} />}
 
       <ProductList
         data={MOCK_PRODUCT_WITH_CATEGORIES}

@@ -23,6 +23,8 @@
     "types": ["node"],
     "baseUrl": "src",
     "paths": {
+      "@api": ["common/api/index"],
+      "@api/*": ["common/api/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@hooks": ["common/hooks/index"],

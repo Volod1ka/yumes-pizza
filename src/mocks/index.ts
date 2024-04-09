@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import type { News } from '@models/news'
 import type {
   Category,
-  CategoryListItem,
+  GroupedProducts,
   Price,
   Product,
 } from '@models/products'
@@ -35,26 +35,26 @@ export const createMockProduct = (): Product => {
 }
 
 export const MOCK_FOOD_CATEGORIES = [
-  { id: '1', name: 'Burger' },
-  { id: '2', name: 'Vegetables' },
-  { id: '3', name: 'Meat & Poultry' },
-  { id: '4', name: 'Seafood' },
-  { id: '5', name: 'Dairy Products' },
-  { id: '6', name: 'Grains & Cereals' },
-  { id: '7', name: 'Beverages' },
-  { id: '8', name: 'Snacks & Sweets' },
-  { id: '9', name: 'Condiments & Sauces' },
-  { id: '10', name: 'Bread & Bakery' },
-  { id: '11', name: 'Frozen Foods' },
-  { id: '12', name: 'Canned Goods' },
-  { id: '13', name: 'Spices & Herbs' },
-  { id: '14', name: 'Nuts & Seeds' },
-  { id: '15', name: 'Oils & Vinegars' },
-  { id: '16', name: 'Desserts' },
-  { id: '17', name: 'Ethnic Foods' },
-  { id: '18', name: 'Organic Products' },
-  { id: '19', name: 'Baby Food' },
-  { id: '20', name: 'Gluten-Free Products' },
+  { id: '1', name: 'Burgers' },
+  { id: '2', name: 'Pizza' },
+  { id: '3', name: 'Fried Chicken' },
+  { id: '4', name: 'Tacos' },
+  { id: '5', name: 'Hot Dogs' },
+  { id: '6', name: 'Sandwiches' },
+  { id: '7', name: 'French Fries' },
+  { id: '8', name: 'Burritos' },
+  { id: '9', name: 'Chicken Nuggets' },
+  { id: '10', name: 'Wraps' },
+  { id: '11', name: 'Subs' },
+  { id: '12', name: 'Salads' },
+  { id: '13', name: 'Fish and Chips' },
+  { id: '14', name: 'Onion Rings' },
+  { id: '15', name: 'Nachos' },
+  { id: '16', name: 'Sushi Rolls' },
+  { id: '17', name: 'Mozzarella Sticks' },
+  { id: '18', name: 'Quesadillas' },
+  { id: '19', name: 'Chili Dogs' },
+  { id: '20', name: 'Gyros' },
 ] satisfies Category[]
 
 export const MOCK_NEWS = [
@@ -106,4 +106,4 @@ export const MOCK_PRODUCT_WITH_CATEGORIES = MOCK_FOOD_CATEGORIES.map(
       count: faker.number.int({ min: 2, max: 12 }),
     }),
   }),
-) satisfies CategoryListItem[]
+) satisfies GroupedProducts[]

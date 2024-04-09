@@ -18,7 +18,6 @@ export type Category = {
   name: string
 }
 
-// TODO maybe another type of list category with products (for example: products has only list of ids)
-export type CategoryListItem = Category & {
+export type GroupedProducts = Category & {
   products: Product[]
 }

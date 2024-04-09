@@ -1,13 +1,13 @@
 import { CategoryLine } from '@components/molecules'
 import type { CartProduct } from '@models/cart'
-import type { CategoryListItem, Product } from '@models/products'
+import type { GroupedProducts, Product } from '@models/products'
 import React from 'react'
 import ProductCard from './ProductCard'
 
 export const MAX_PRODUCTS_IN_CATEGORY = 8
 
 export type ProductListProps = {
-  data: CategoryListItem[]
+  data: GroupedProducts[]
   selectedData: CartProduct[]
   withMore?: boolean
   maxRenderProducts?: number
