@@ -36,7 +36,6 @@ const NewsSwiper = ({ news, className }: NewsSwiperProps) => {
         mousewheel={{
           enabled: true,
           forceToAxis: true,
-          sensitivity: 0.001,
         }}
         autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
         slidesPerView="auto"
