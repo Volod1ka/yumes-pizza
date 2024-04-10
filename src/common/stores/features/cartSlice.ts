@@ -16,7 +16,7 @@ export type AddProductAction = {
   product: Product
 }
 
-export type SubProductAction = {
+export type IdProductAction = {
   productId: string
 }
 
@@ -24,6 +24,27 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    addCartProduct: (
+      state,
+      { payload: { productId } }: PayloadAction<IdProductAction>,
+    ) => {
+      const existingProductIndex = state.products.findIndex(
+        item => item.id === productId,
+      )
+
+      if (existingProductIndex === -1) {
+        return state
+      }
+
+      const existingProduct = state.products[existingProductIndex]
+
+      existingProduct.count = existingProduct.count + 1
+
+      state.totalPrice +=
+        existingProduct.price.selling ?? existingProduct.price.full
+
+      return state
+    },
     addProduct: (
       state,
       { payload: { product } }: PayloadAction<AddProductAction>,
@@ -52,7 +73,7 @@ const cartSlice = createSlice({
     },
     subProduct: (
       state,
-      { payload: { productId } }: PayloadAction<SubProductAction>,
+      { payload: { productId } }: PayloadAction<IdProductAction>,
     ) => {
       const existingProductIndex = state.products.findIndex(
         product => product.id === productId,
@@ -72,12 +93,38 @@ const cartSlice = createSlice({
 
       return state
     },
+    removeProduct: (
+      state,
+      { payload: { productId } }: PayloadAction<IdProductAction>,
+    ) => {
+      const existingProductIndex = state.products.findIndex(
+        product => product.id === productId,
+      )
+
+      if (existingProductIndex === -1) {
+        return state
+      }
+
+      const existingProduct = state.products.splice(existingProductIndex, 1)[0]
+
+      state.totalPrice -=
+        (existingProduct.price.selling ?? existingProduct.price.full) *
+        existingProduct.count
+
+      return state
+    },
     removeAll: () => {
       return { products: [], totalPrice: 0 }
     },
   },
 })
 
-export const { addProduct, subProduct, removeAll } = cartSlice.actions
+export const {
+  addProduct,
+  addCartProduct,
+  subProduct,
+  removeProduct,
+  removeAll,
+} = cartSlice.actions
 
 export default cartSlice.reducer

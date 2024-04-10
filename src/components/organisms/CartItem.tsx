@@ -12,7 +12,7 @@ export type CartItemProps = Pick<
   stock: number
   onAdd?: (id: string) => void
   onSub?: (id: string) => void
-  onDelete?: (id: string) => void
+  onRemove?: (id: string) => void
 }
 
 const CartItem = ({
@@ -21,7 +21,7 @@ const CartItem = ({
   stock,
   onAdd,
   onSub,
-  onDelete,
+  onRemove,
 }: CartItemProps) => {
   return (
     <div
@@ -59,7 +59,7 @@ const CartItem = ({
         <IconButton
           border="default"
           icon="TrashBinIcon"
-          onClick={() => onDelete?.(id)}
+          onClick={() => onRemove?.(id)}
         />
       </div>
     </div>

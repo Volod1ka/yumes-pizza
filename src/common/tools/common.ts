@@ -1,4 +1,4 @@
-const MOCK_DATA_ENABLED: boolean = true
+const MOCK_DATA_ENABLED: boolean = false
 
 export const requestWithMock = async <T>(
   callBack: () => Promise<T>,
