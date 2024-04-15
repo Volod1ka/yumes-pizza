@@ -1,4 +1,4 @@
-import type { AllHTMLAttributes } from 'react'
+import type { AllHTMLAttributes, ButtonHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { TextButton } from './buttons'
 
@@ -11,6 +11,7 @@ export type CategoryLineProps = Pick<
   title: string
   titleAlign?: TitleAlign
   right?: {
+    className?: ButtonHTMLAttributes<HTMLButtonElement>['className']
     title: string
     onPress: () => void
   }
@@ -33,7 +34,13 @@ const CategoryLine = ({
       </div>
 
       <div className="flex flex-1 flex-row justify-end">
-        {right && <TextButton label={right.title} onClick={right.onPress} />}
+        {right && (
+          <TextButton
+            className={right.className}
+            label={right.title}
+            onClick={right.onPress}
+          />
+        )}
       </div>
     </div>
   )

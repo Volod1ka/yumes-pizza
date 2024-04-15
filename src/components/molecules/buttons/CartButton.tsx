@@ -9,7 +9,9 @@ export type CartButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   totalPrice?: number
 }
 
-export const cartButtonStyle: ClassNameValue = ['flex-row p-2 gap-1 w-auto']
+export const cartButtonStyle: ClassNameValue = [
+  'flex-row p-2 gap-1 w-auto ease-out duration-300',
+]
 
 const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
   ({ className, count = 0, totalPrice = 0, ...props }, ref) => (

@@ -6,7 +6,7 @@ export type TextButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export const textButtonStyle: ClassNameValue = [
-  'py-[10px] text-description text-dark_gray font-medium',
+  'py-[10px] text-description text-dark_gray font-medium ease-out duration-500',
   'disabled:text-thin_gray',
   'hover:text-dark_red',
 ]

@@ -16,7 +16,9 @@ const Header = () => {
 
         <div className="shrink-0 justify-center">
           <NavLink to={NAVIGATION_ROUTES.home}>
-            <h1 className="text-5xl text-dark_gray">Yumes Pizza</h1>
+            <h1 className="text-5xl text-dark_gray ease-out duration-300 hover:scale-110">
+              Yumes Pizza
+            </h1>
           </NavLink>
         </div>
 

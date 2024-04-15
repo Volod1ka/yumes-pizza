@@ -15,7 +15,7 @@ export type CountButtonStyleProps = { counted: boolean }
 export const countButtonStyle = ({
   counted,
 }: CountButtonStyleProps): ClassNameValue => [
-  'flex flex-row px-[10px] py-[10px] w-[104px] rounded-[20px] items-center justify-center text-heading6 text-dark_gray font-bold bg-light_gray shadow-md cursor-pointer',
+  'flex flex-row px-[10px] py-[10px] w-[104px] rounded-[20px] items-center justify-center text-heading6 text-dark_gray font-bold bg-light_gray shadow-md cursor-pointer ease-out duration-300',
   counted &&
     'justify-between bg-dark_red text-white shadow-md-red cursor-default',
   !counted && 'hover:bg-dark_red hover:text-white hover:shadow-md-red',

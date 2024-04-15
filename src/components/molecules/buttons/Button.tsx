@@ -6,7 +6,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export const buttonStyle: ClassNameValue = [
-  'px-5 py-[10px] rounded-[20px] text-heading6 text-dark_gray font-bold bg-light_gray shadow-md',
+  'px-5 py-[10px] rounded-[20px] text-heading6 text-dark_gray font-bold bg-light_gray shadow-md ease-out duration-300',
   'disabled:bg-light_gray disabled:text-thin_gray disabled:shadow-md',
   'hover:bg-dark_red hover:text-white hover:shadow-md-red',
 ]
