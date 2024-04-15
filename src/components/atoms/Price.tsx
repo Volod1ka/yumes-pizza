@@ -1,11 +1,15 @@
 export type PriceProps = {
+  label?: string
   price: number
   crossed?: number
   currency?: string
 }
 
-const Price = ({ price, crossed, currency = '₴' }: PriceProps) => (
+const Price = ({ price, crossed, label, currency = '₴' }: PriceProps) => (
   <div className="flex flex-row">
+    {label?.length && (
+      <p className="mr-2 text-heading6 text-dark_gray font-bold">{`${label}`}</p>
+    )}
     {crossed && (
       <p className="mr-2 text-heading6 text-thin_gray font-bold line-through">{`${crossed}`}</p>
     )}

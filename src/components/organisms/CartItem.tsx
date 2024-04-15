@@ -9,7 +9,6 @@ export type CartItemProps = Pick<
   'className'
 > & {
   product: CartProduct
-  stock: number
   onAdd?: (id: string) => void
   onSub?: (id: string) => void
   onRemove?: (id: string) => void
@@ -17,8 +16,7 @@ export type CartItemProps = Pick<
 
 const CartItem = ({
   className,
-  product: { image, name, price, count, id },
-  stock,
+  product: { image, name, price, count, id, stock },
   onAdd,
   onSub,
   onRemove,

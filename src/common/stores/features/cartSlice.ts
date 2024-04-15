@@ -5,11 +5,13 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 export type CartState = {
   products: CartProduct[]
   totalPrice: number
+  discount: number
 }
 
 const initialState: CartState = {
   products: [],
   totalPrice: 0,
+  discount: 0,
 } satisfies CartState
 
 export type AddProductAction = {
@@ -40,6 +42,11 @@ const cartSlice = createSlice({
 
       existingProduct.count = existingProduct.count + 1
 
+      if (existingProduct.price.selling) {
+        state.discount +=
+          existingProduct.price.full - existingProduct.price.selling
+      }
+
       state.totalPrice +=
         existingProduct.price.selling ?? existingProduct.price.full
 
@@ -59,12 +66,17 @@ const cartSlice = createSlice({
           image: product.image,
           name: product.name,
           price: product.price,
+          stock: product.stock,
           count: 1,
         })
       } else {
         const existingProduct = state.products[existingProductIndex]
 
         existingProduct.count = existingProduct.count + 1
+      }
+
+      if (product.price.selling) {
+        state.discount += product.price.full - product.price.selling
       }
 
       state.totalPrice += product.price.selling ?? product.price.full
@@ -88,6 +100,10 @@ const cartSlice = createSlice({
           state.products.splice(existingProductIndex, 1)
         }
 
+        if (product.price.selling) {
+          state.discount -= product.price.full - product.price.selling
+        }
+
         state.totalPrice -= product.price.selling ?? product.price.full
       }
 
@@ -107,6 +123,12 @@ const cartSlice = createSlice({
 
       const existingProduct = state.products.splice(existingProductIndex, 1)[0]
 
+      if (existingProduct.price.selling) {
+        state.discount -=
+          (existingProduct.price.full - existingProduct.price.selling) *
+          existingProduct.count
+      }
+
       state.totalPrice -=
         (existingProduct.price.selling ?? existingProduct.price.full) *
         existingProduct.count
@@ -114,7 +136,7 @@ const cartSlice = createSlice({
       return state
     },
     removeAll: () => {
-      return { products: [], totalPrice: 0 }
+      return { products: [], totalPrice: 0, discount: 0 }
     },
   },
 })

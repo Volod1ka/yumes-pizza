@@ -5,5 +5,6 @@ export type CartProduct = {
   name: string
   image: string
   count: number
+  stock: number
   price: Price
 }

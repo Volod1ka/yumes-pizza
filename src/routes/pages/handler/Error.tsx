@@ -2,13 +2,17 @@ import { Button } from '@components/molecules/buttons'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
   isRouteErrorResponse,
+  useAsyncError,
   useNavigate,
   useRouteError,
 } from 'react-router-dom'
 
 const ErrorPage = () => {
-  const error = useRouteError()
+  const routeError = useRouteError()
+  const asyncError = useAsyncError()
   const navigation = useNavigate()
+
+  const error = routeError ?? asyncError
 
   const message = isRouteErrorResponse(error)
     ? `${error.status} ${error.statusText}`
