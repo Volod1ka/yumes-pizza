@@ -1,4 +1,8 @@
-import type { AllHTMLAttributes, InputHTMLAttributes } from 'react'
+import {
+  forwardRef,
+  type AllHTMLAttributes,
+  type InputHTMLAttributes,
+} from 'react'
 import { twJoin } from 'tailwind-merge'
 
 export type RadioButtonProps = Omit<
@@ -9,26 +13,26 @@ export type RadioButtonProps = Omit<
   containerStyle?: AllHTMLAttributes<HTMLDivElement>['className']
 }
 
-const RadioButton = ({
-  label,
-  containerStyle,
-  className,
-  ...props
-}: RadioButtonProps) => {
-  return (
-    <div className={twJoin('flex items-center', containerStyle)}>
-      <input
-        type="radio"
-        {...props}
-        className={twJoin('accent-dark_red w-6 h-6', className)}
-      />
-      {label?.length && (
-        <label className="ml-[14px] text-description text-dark_gray font-medium">
-          {label}
-        </label>
-      )}
-    </div>
-  )
-}
+export const getRadioButtonKey = (key: string) => `radio-input-${key}`
+
+const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
+  ({ label, containerStyle, className, ...props }, ref) => {
+    return (
+      <div className={twJoin('flex items-center', containerStyle)}>
+        <input
+          type="radio"
+          {...props}
+          ref={ref}
+          className={twJoin('accent-dark_red w-6 h-6', className)}
+        />
+        {label?.length && (
+          <label className="ml-[14px] text-description text-dark_gray font-medium">
+            {label}
+          </label>
+        )}
+      </div>
+    )
+  },
+)
 
 export default RadioButton

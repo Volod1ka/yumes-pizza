@@ -9,7 +9,10 @@ export const NAVIGATION_ROUTES = {
   signUp: '/signUp',
   // cart
   cart: '/cart',
-  orderCheckouted: '/cart/:idOrder/success',
+  orderCheckouted: (idOrder?: string) =>
+    typeof idOrder === 'string'
+      ? `/cart/${idOrder}/success`
+      : '/cart/:idOrder/success',
   // else
   notFound: '*',
 } as const

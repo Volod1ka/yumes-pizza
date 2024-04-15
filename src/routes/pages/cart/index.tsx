@@ -1,8 +1,17 @@
 import { Price } from '@components/atoms'
 import { CategoryLine } from '@components/molecules'
 import { Button } from '@components/molecules/buttons'
-import { Input, RadioButton } from '@components/molecules/form'
+import {
+  Input,
+  RadioButton,
+  type InputProps,
+  type RadioButtonProps,
+} from '@components/molecules/form'
+import { getInputKey } from '@components/molecules/form/Input'
+import { getRadioButtonKey } from '@components/molecules/form/RadioButton'
 import { CartItem } from '@components/organisms'
+import type { RecipientData } from '@models/order'
+import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
   addCartProduct,
   removeAll,
@@ -10,13 +19,31 @@ import {
   subProduct,
 } from '@stores/features/cartSlice'
 import { useStoreDispatch, useStoreSelector } from '@stores/store'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import CartEmptyPage from './CartEmpty'
+import { ORDER_ID } from './OrderCheckouted'
 
 const CartPage = () => {
+  const navigation = useNavigate()
+
   const dispatch = useStoreDispatch()
   const { products, totalPrice, discount } = useStoreSelector(
     state => state.cart,
   )
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+    reset,
+  } = useForm<RecipientData>({
+    reValidateMode: 'onChange',
+    mode: 'onChange',
+    defaultValues: {
+      payment: 'cash',
+    },
+  })
 
   if (products.length === 0) {
     return <CartEmptyPage />
@@ -37,6 +64,76 @@ const CartPage = () => {
   const removeProductFromList = (productId: string) => {
     dispatch(removeProduct({ productId }))
   }
+
+  // TODO in progress
+  const onSubmitOrder = handleSubmit(data => {
+    console.log({ data })
+
+    clearCartOfProducts()
+    reset()
+
+    navigation(NAVIGATION_ROUTES.orderCheckouted(ORDER_ID), { replace: true })
+  })
+
+  const inputs = [
+    {
+      ...register('name', { required: true }),
+      placeholder: 'Name',
+    },
+    {
+      type: 'tel',
+      ...register('phone', { required: true }),
+      placeholder: 'Phone number',
+    },
+    {
+      required: true,
+      ...register('address.street', { required: true }),
+      placeholder: 'Street address',
+      containerStyle: 'w-3/5',
+    },
+    {
+      ...register('address.building'),
+      placeholder: 'Building',
+      containerStyle: 'w-1/5',
+    },
+    {
+      ...register('address.appart'),
+      placeholder: 'Appart./Office',
+      containerStyle: 'w-1/5',
+    },
+    {
+      ...register('address.floor'),
+      placeholder: 'Floor',
+      containerStyle: 'w-3/5',
+    },
+    {
+      ...register('address.entrance'),
+      placeholder: 'Entrance',
+      containerStyle: 'w-1/5',
+    },
+    {
+      ...register('address.intercom'),
+      placeholder: 'Intercom',
+      containerStyle: 'w-1/5',
+    },
+    {
+      ...register('details'),
+      placeholder: 'Details to order',
+    },
+  ] satisfies InputProps[]
+
+  const radioButtons = [
+    {
+      value: 'cash',
+      ...register('payment', { required: true }),
+      label: 'Payment in cash',
+    },
+    {
+      value: 'terminal',
+      ...register('payment', { required: true }),
+      label: 'Payment by the terminal',
+    },
+  ] satisfies RadioButtonProps[]
 
   return (
     <div className="flex flex-row pb-20 px-5 gap-[30px] max-lg:flex-col max-lg:gap-0">
@@ -68,7 +165,7 @@ const CartPage = () => {
       </div>
 
       <div className="w-1/2 mb-auto p-[30px] shadow-md rounded-[20px] max-lg:mt-2 max-lg:w-auto ">
-        <form>
+        <form onSubmit={onSubmitOrder}>
           <CategoryLine
             title="Recipient data"
             titleAlign="left"
@@ -79,36 +176,27 @@ const CartPage = () => {
               onPress: () => {},
             }}
           />
-
           <div className="flex flex-row gap-[30px]">
-            <Input required id="name" name="name" placeholder="Name" />
-            <Input
-              required
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Phone number"
-            />
+            {inputs.slice(0, 2).map(input => (
+              <Input key={getInputKey(input.name)} {...input} required />
+            ))}
           </div>
-
           <div className="flex grow flex-col mt-[60px] gap-[30px]">
             <div className="flex flex-row gap-[30px] w-full">
-              <Input
-                required
-                placeholder="Street address"
-                containerStyle="w-3/5"
-              />
-              <Input required placeholder="Building" containerStyle="w-1/5" />
-              <Input placeholder="Appart./Office" containerStyle="w-1/5" />
+              {inputs.slice(2, 5).map(input => (
+                <Input key={getInputKey(input.name)} {...input} />
+              ))}
             </div>
             <div className="flex flex-row gap-[30px] w-full">
-              <Input placeholder="Floor" containerStyle="w-3/5" />
-              <Input placeholder="Entrance" containerStyle="w-1/5" />
-              <Input placeholder="Intercom" containerStyle="w-1/5" />
+              {inputs.slice(5, 8).map(input => (
+                <Input key={getInputKey(input.name)} {...input} />
+              ))}
             </div>
 
             <div className="flex flex-row mt-[60px] gap-[30px] w-full">
-              <Input placeholder="Details to order" />
+              {inputs.slice(8, 9).map(input => (
+                <Input key={getInputKey(input.name)} {...input} />
+              ))}
             </div>
           </div>
 
@@ -117,25 +205,18 @@ const CartPage = () => {
             title="Terms of payment"
             titleAlign="left"
           />
-
           <div className="flex flex-col mt-[30px] gap-[30px]">
-            <RadioButton
-              checked
-              radioGroup="payment"
-              name="payment"
-              value="cash"
-              label="Payment in cash"
-            />
-            <RadioButton
-              radioGroup="payment"
-              name="payment"
-              value="terminal"
-              label="Payment by the terminal"
-            />
+            {radioButtons.slice(0, 2).map(radioButton => (
+              <RadioButton
+                key={getRadioButtonKey(radioButton.value)}
+                radioGroup="payment"
+                {...radioButton}
+              />
+            ))}
           </div>
 
           <div className="flex flex-row justify-end">
-            <Button label="Make order" disabled />
+            <Button type="submit" label="Make order" disabled={!isValid} />
           </div>
         </form>
       </div>

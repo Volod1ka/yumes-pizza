@@ -4,7 +4,7 @@ import { NAVIGATION_ROUTES, type OrderCheckoutedParams } from '@routes/routes'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 // TODO remove
-const ORDER_ID: string = '1234'
+export const ORDER_ID: string = '1234'
 
 const OrderCheckoutedPage = () => {
   const navigation = useNavigate()
