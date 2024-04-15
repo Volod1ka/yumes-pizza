@@ -42,7 +42,7 @@ const CartItem = ({
         </p>
       </div>
 
-      <div className="flex flex-row gap-10 items-center">
+      <div className="flex flex-row gap-5 items-center">
         <Price
           price={price.selling || price.full}
           crossed={price.selling ? price.full : undefined}

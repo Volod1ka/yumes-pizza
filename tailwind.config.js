@@ -1,4 +1,3 @@
-// TODO remove that
 import defaultTheme from 'tailwindcss/defaultTheme'
 
 /** @type {import('tailwindcss').Config} */
@@ -25,7 +24,6 @@ module.exports = {
       },
     },
     fontSize: {
-      // TODO remove defaults font sizes
       ...defaultTheme.fontSize,
       caption_small: ['12px', { lineHeight: '16px' }],
       caption: ['14px', { lineHeight: '18px' }],
@@ -39,10 +37,10 @@ module.exports = {
     },
     // TODO maybe create stack of screens size
     // screens: {
-    //   sm: '480px',
-    //   md: '768px',
-    //   lg: '976px',
-    //   xl: '1440px',
+    //   phone: '480px',
+    //   tablet: '768px',
+    //   laptop: '976px',
+    //   desktop: '1440px',
     // },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

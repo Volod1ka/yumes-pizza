@@ -1,6 +1,6 @@
 import { ShoppingBagIcon } from '@assets/icons'
 import { Badge, Price } from '@components/atoms'
-import { forwardRef, type ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes } from 'react'
 import { twMerge, type ClassNameValue } from 'tailwind-merge'
 import { iconButtonStyle } from './IconButton'
 
@@ -13,10 +13,16 @@ export const cartButtonStyle: ClassNameValue = [
   'flex-row p-2 gap-1 w-auto ease-out duration-300',
 ]
 
-const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
-  ({ className, count = 0, totalPrice = 0, ...props }, ref) => (
+const CartButton = ({
+  type = 'button',
+  className,
+  count = 0,
+  totalPrice = 0,
+  ...props
+}: CartButtonProps) => {
+  return (
     <button
-      ref={ref}
+      type={type}
       className={twMerge(
         iconButtonStyle({ border: 'outline' }),
         cartButtonStyle,
@@ -32,7 +38,7 @@ const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
       </div>
       {totalPrice > 0 && <Price price={totalPrice} />}
     </button>
-  ),
-)
+  )
+}
 
 export default CartButton

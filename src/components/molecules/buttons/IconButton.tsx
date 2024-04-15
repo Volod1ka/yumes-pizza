@@ -1,6 +1,6 @@
 import * as Icons from '@assets/icons'
 import type { IconsName } from '@tools/types'
-import { forwardRef, type ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes } from 'react'
 import { twMerge, type ClassNameValue } from 'tailwind-merge'
 
 export type BorderType = 'default' | 'outline'
@@ -20,20 +20,25 @@ export const iconButtonStyle = ({
     'border-[1px] border-dark_gray disabled:border-thin_gray',
 ]
 
-const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, border = 'outline', label, icon, ...props }, ref) => {
-    const SVG = Icons[icon]
+const IconButton = ({
+  type = 'button',
+  className,
+  border = 'outline',
+  label,
+  icon,
+  ...props
+}: IconButtonProps) => {
+  const SVG = Icons[icon]
 
-    return (
-      <button
-        ref={ref}
-        className={twMerge(iconButtonStyle({ border }), className)}
-        {...props}
-      >
-        {label?.length ? label[0] : <SVG />}
-      </button>
-    )
-  },
-)
+  return (
+    <button
+      type={type}
+      className={twMerge(iconButtonStyle({ border }), className)}
+      {...props}
+    >
+      {label?.length ? label[0] : <SVG />}
+    </button>
+  )
+}
 
 export default IconButton
