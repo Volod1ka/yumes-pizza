@@ -1,27 +1,28 @@
 import * as Animations from '@assets/animations'
 import type { AnimationsName } from '@tools/types'
-import { forwardRef } from 'react'
-import LottieView, { type LottieProps, type Options } from 'react-lottie'
+import Lottie, { type LottieProps } from 'react-lottie-player'
 
-export type AnimationProps = Omit<LottieProps, 'options'> &
-  Omit<Options, 'animationData'> & {
-    name: AnimationsName
-  }
+export type AnimationProps = Omit<LottieProps, 'animationData'> & {
+  name: AnimationsName
+}
 
-const Animation = forwardRef<LottieView, AnimationProps>(
-  ({ name, autoplay = true, loop = true, rendererSettings, ...props }, ref) => {
-    const animationData = Animations[name]
+const Animation = ({
+  name,
+  play = true,
+  loop = true,
+  ...props
+}: AnimationProps) => {
+  const animationData = Animations[name]
 
-    return (
-      <LottieView
-        ref={ref}
-        ariaRole="none"
-        isClickToPauseDisabled
-        {...props}
-        options={{ animationData, autoplay, loop, rendererSettings }}
-      />
-    )
-  },
-)
+  return (
+    <Lottie
+      animationData={animationData}
+      play={play}
+      loop={loop}
+      role="none"
+      {...props}
+    />
+  )
+}
 
 export default Animation

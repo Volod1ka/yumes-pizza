@@ -9,7 +9,7 @@ const CartEmptyPage = () => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="flex flex-col pb-3 items-center">
-        <Animation name="PackingLottie" height={250} />
+        <Animation name="PackingLottie" style={{ height: 250 }} />
 
         <div className="pb-14">
           <p className="text-heading6 text-dark_gray text-center font-bold">
