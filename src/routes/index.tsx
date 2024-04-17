@@ -12,6 +12,7 @@ import {
   MainLayoutPage,
   NotFoundPage,
   OrderCheckoutedPage,
+  ProfilePage,
   SignInPage,
   SignUpPage,
 } from './pages'
@@ -27,13 +28,14 @@ const routersFromElements = createRoutesFromElements(
       <Route index element={<HomePage />} />
       <Route path={NAVIGATION_ROUTES.category()} element={<CategoryPage />} />
     </Route>
-    <Route path={NAVIGATION_ROUTES.singIn} element={<SignInPage />} />
+    <Route path={NAVIGATION_ROUTES.signIn} element={<SignInPage />} />
     <Route path={NAVIGATION_ROUTES.signUp} element={<SignUpPage />} />
     <Route path={NAVIGATION_ROUTES.cart} element={<CartPage />} />
     <Route
       path={NAVIGATION_ROUTES.orderCheckouted()}
       element={<OrderCheckoutedPage />}
     />
+    <Route path={NAVIGATION_ROUTES.profile} element={<ProfilePage />} />
     <Route path={NAVIGATION_ROUTES.notFound} element={<NotFoundPage />} />
   </Route>,
 )

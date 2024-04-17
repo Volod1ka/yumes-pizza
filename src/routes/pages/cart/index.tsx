@@ -11,6 +11,7 @@ import { getInputKey } from '@components/molecules/form/Input'
 import { getRadioButtonKey } from '@components/molecules/form/RadioButton'
 import { CartItem } from '@components/organisms'
 import { useCartForm } from '@hooks/form'
+import { MOCK_USER } from '@mocks'
 import type { Order, OrderProducts } from '@models/order'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
@@ -20,6 +21,7 @@ import {
   subProduct,
 } from '@stores/features/cartSlice'
 import { useStoreDispatch, useStoreSelector } from '@stores/store'
+import { AUTH_USER } from '@tools/common'
 import { useNavigate } from 'react-router-dom'
 import CartEmptyPage from './CartEmpty'
 import { ORDER_ID } from './OrderCheckouted'
@@ -38,7 +40,14 @@ const CartPage = () => {
     formState: { isValid },
     reset,
     getFieldState,
-  } = useCartForm()
+  } = useCartForm({
+    name: AUTH_USER ? MOCK_USER.name : undefined,
+    phone: AUTH_USER ? MOCK_USER.phone : undefined,
+    address: {
+      street: AUTH_USER ? MOCK_USER.address.street : undefined,
+      building: AUTH_USER ? MOCK_USER.address.building : undefined,
+    },
+  })
 
   if (products.length === 0) {
     return <CartEmptyPage />
@@ -208,7 +217,9 @@ const CartPage = () => {
               className:
                 'text-transparent bg-clip-text bg-gradient-to-r from-dark_gray to-dark_red',
               title: 'Sign In',
-              onPress: () => {},
+              onPress: () => {
+                navigation(NAVIGATION_ROUTES.signIn)
+              },
             }}
           />
           <div className="flex flex-row gap-[30px]">

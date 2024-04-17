@@ -1,6 +1,8 @@
 import { CartButton, IconButton } from '@components/molecules/buttons'
+import { MOCK_USER } from '@mocks'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import { useStoreSelector } from '@stores/store'
+import { AUTH_USER } from '@tools/common'
 import { NavLink } from 'react-router-dom'
 
 export const setNavStateStyle = (isActive: boolean) =>
@@ -33,7 +35,16 @@ const Header = () => {
             )}
           </NavLink>
 
-          <IconButton icon="UserIcon" />
+          <NavLink to={NAVIGATION_ROUTES.profile}>
+            {({ isActive }) => (
+              <IconButton
+                icon="UserIcon"
+                className={setNavStateStyle(isActive)}
+                // TODO
+                label={AUTH_USER ? MOCK_USER.name : undefined}
+              />
+            )}
+          </NavLink>
         </div>
       </div>
     </header>

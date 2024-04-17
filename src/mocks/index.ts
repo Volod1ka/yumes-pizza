@@ -1,11 +1,13 @@
 import { faker } from '@faker-js/faker'
 import type { News } from '@models/news'
+import type { Address } from '@models/order'
 import type {
   Category,
   GroupedProducts,
   Price,
   Product,
 } from '@models/products'
+import type { User } from '@models/user'
 
 export const createMockProduct = (): Product => {
   const isSale = !faker.number.int({ min: 0, max: 5 })
@@ -31,6 +33,17 @@ export const createMockProduct = (): Product => {
     stock: faker.number.int({ min: 1, max: 30 }),
     price,
     description: faker.lorem.lines({ min: 1, max: 7 }),
+  }
+}
+
+export const createMockAddress = (): Address => {
+  return {
+    appart: null,
+    building: faker.location.buildingNumber(),
+    entrance: null,
+    floor: null,
+    intercom: null,
+    street: faker.location.street(),
   }
 }
 
@@ -107,3 +120,11 @@ export const MOCK_PRODUCT_WITH_CATEGORIES = MOCK_FOOD_CATEGORIES.map(
     }),
   }),
 ) satisfies GroupedProducts[]
+
+export const MOCK_USER = {
+  id: faker.string.uuid(),
+  address: createMockAddress(),
+  email: faker.internet.email(),
+  name: faker.person.firstName(),
+  phone: faker.phone.number('##########'),
+} satisfies User
