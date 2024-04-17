@@ -3,6 +3,9 @@ import { Input, type InputProps } from '@components/molecules/form'
 import { getInputKey } from '@components/molecules/form/Input'
 import { AuthLayout } from '@components/templates'
 import { useSignUpForm } from '@hooks/form'
+import { NAVIGATION_ROUTES } from '@routes/routes'
+import { AUTH_USER } from '@tools/common'
+import { Navigate } from 'react-router-dom'
 
 const SignUpPage = () => {
   const {
@@ -11,6 +14,11 @@ const SignUpPage = () => {
     formState: { isValid },
     hasInvalideField,
   } = useSignUpForm()
+
+  // TODO
+  if (AUTH_USER) {
+    return <Navigate to={NAVIGATION_ROUTES.profile} replace />
+  }
 
   const onSubmitSignUp = handleSubmit(async data => {
     if (!isValid) {

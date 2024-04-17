@@ -4,7 +4,8 @@ import { getInputKey } from '@components/molecules/form/Input'
 import { AuthLayout } from '@components/templates'
 import { useSignInForm } from '@hooks/form'
 import { NAVIGATION_ROUTES } from '@routes/routes'
-import { useNavigate } from 'react-router-dom'
+import { AUTH_USER } from '@tools/common'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const onClickForgotPassword = () => {}
 
@@ -17,6 +18,11 @@ const SignInPage = () => {
     formState: { isValid },
     hasInvalideField,
   } = useSignInForm()
+
+  // TODO
+  if (AUTH_USER) {
+    return <Navigate to={NAVIGATION_ROUTES.profile} replace />
+  }
 
   const onSubmitSignIn = handleSubmit(async data => {
     if (!isValid) {

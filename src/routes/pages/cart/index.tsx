@@ -46,6 +46,10 @@ const CartPage = () => {
     address: {
       street: AUTH_USER ? MOCK_USER.address.street : undefined,
       building: AUTH_USER ? MOCK_USER.address.building : undefined,
+      appart: AUTH_USER ? MOCK_USER.address.appart ?? undefined : undefined,
+      entrance: AUTH_USER ? MOCK_USER.address.entrance ?? undefined : undefined,
+      floor: AUTH_USER ? MOCK_USER.address.floor ?? undefined : undefined,
+      intercom: AUTH_USER ? MOCK_USER.address.intercom ?? undefined : undefined,
     },
   })
 
@@ -213,14 +217,19 @@ const CartPage = () => {
           <CategoryLine
             title="Recipient data"
             titleAlign="left"
-            right={{
-              className:
-                'text-transparent bg-clip-text bg-gradient-to-r from-dark_gray to-dark_red',
-              title: 'Sign In',
-              onPress: () => {
-                navigation(NAVIGATION_ROUTES.signIn)
-              },
-            }}
+            right={
+              // TODO
+              AUTH_USER
+                ? undefined
+                : {
+                    className:
+                      'text-transparent bg-clip-text bg-gradient-to-r from-dark_gray to-dark_red',
+                    title: 'Sign In',
+                    onPress: () => {
+                      navigation(NAVIGATION_ROUTES.signIn)
+                    },
+                  }
+            }
           />
           <div className="flex flex-row gap-[30px]">
             {inputs.slice(0, 2).map(input => (
