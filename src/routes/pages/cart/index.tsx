@@ -10,7 +10,8 @@ import {
 import { getInputKey } from '@components/molecules/form/Input'
 import { getRadioButtonKey } from '@components/molecules/form/RadioButton'
 import { CartItem } from '@components/organisms'
-import type { RecipientData } from '@models/order'
+import { useCartForm } from '@hooks/form'
+import type { Order, OrderProducts } from '@models/order'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
   addCartProduct,
@@ -19,7 +20,6 @@ import {
   subProduct,
 } from '@stores/features/cartSlice'
 import { useStoreDispatch, useStoreSelector } from '@stores/store'
-import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import CartEmptyPage from './CartEmpty'
 import { ORDER_ID } from './OrderCheckouted'
@@ -37,13 +37,8 @@ const CartPage = () => {
     handleSubmit,
     formState: { isValid },
     reset,
-  } = useForm<RecipientData>({
-    reValidateMode: 'onChange',
-    mode: 'onChange',
-    defaultValues: {
-      payment: 'cash',
-    },
-  })
+    getFieldState,
+  } = useCartForm()
 
   if (products.length === 0) {
     return <CartEmptyPage />
@@ -66,57 +61,97 @@ const CartPage = () => {
   }
 
   // TODO in progress
-  const onSubmitOrder = handleSubmit(data => {
-    console.log({ data })
+  const onSubmitOrder = handleSubmit(
+    async ({ address, details, name, payment, phone }) => {
+      if (!isValid) {
+        return
+      }
 
-    clearCartOfProducts()
-    reset()
+      const orderProducts: OrderProducts[] = products.map(
+        ({ id, count, price }) => ({
+          id,
+          count,
+          price: (price.selling ?? price.full) * count,
+        }),
+      )
 
-    navigation(NAVIGATION_ROUTES.orderCheckouted(ORDER_ID), { replace: true })
-  })
+      const newOrder: Order = {
+        products: orderProducts,
+        totalPrice,
+        discount,
+        name,
+        phone,
+        details: details || null,
+        address: {
+          appart: address.appart || null,
+          building: address.building,
+          entrance: address.entrance || null,
+          floor: address.floor || null,
+          intercom: address.intercom || null,
+          street: address.street,
+        },
+        payment,
+      }
+
+      // TODO remove this later
+      console.log(JSON.stringify({ newOrder }))
+
+      clearCartOfProducts()
+      reset()
+
+      navigation(NAVIGATION_ROUTES.orderCheckouted(ORDER_ID), { replace: true })
+    },
+  )
 
   const inputs = [
     {
+      maxLength: 50,
       ...register('name', { required: true }),
       placeholder: 'Name',
     },
     {
+      maxLength: 11,
       type: 'tel',
       ...register('phone', { required: true }),
       placeholder: 'Phone number',
     },
     {
+      maxLength: 60,
       required: true,
       ...register('address.street', { required: true }),
       placeholder: 'Street address',
-      containerStyle: 'w-3/5',
+      containerStyle: 'w-3/4',
     },
     {
-      ...register('address.building'),
+      maxLength: 10,
+      required: true,
+      ...register('address.building', { required: true }),
       placeholder: 'Building',
-      containerStyle: 'w-1/5',
+      containerStyle: 'w-1/4',
     },
     {
+      maxLength: 5,
       ...register('address.appart'),
       placeholder: 'Appart./Office',
-      containerStyle: 'w-1/5',
     },
     {
+      maxLength: 2,
       ...register('address.floor'),
       placeholder: 'Floor',
-      containerStyle: 'w-3/5',
     },
     {
+      maxLength: 5,
       ...register('address.entrance'),
       placeholder: 'Entrance',
-      containerStyle: 'w-1/5',
     },
     {
+      maxLength: 10,
       ...register('address.intercom'),
       placeholder: 'Intercom',
-      containerStyle: 'w-1/5',
     },
     {
+      maxLength: 150,
+      multiple: true,
       ...register('details'),
       placeholder: 'Details to order',
     },
@@ -178,24 +213,42 @@ const CartPage = () => {
           />
           <div className="flex flex-row gap-[30px]">
             {inputs.slice(0, 2).map(input => (
-              <Input key={getInputKey(input.name)} {...input} required />
+              <Input
+                key={getInputKey(input.name)}
+                {...input}
+                required
+                invalid={getFieldState(input.name).invalid}
+              />
             ))}
           </div>
           <div className="flex grow flex-col mt-[60px] gap-[30px]">
             <div className="flex flex-row gap-[30px] w-full">
-              {inputs.slice(2, 5).map(input => (
-                <Input key={getInputKey(input.name)} {...input} />
+              {inputs.slice(2, 4).map(input => (
+                <Input
+                  key={getInputKey(input.name)}
+                  {...input}
+                  invalid={getFieldState(input.name).invalid}
+                />
               ))}
             </div>
             <div className="flex flex-row gap-[30px] w-full">
-              {inputs.slice(5, 8).map(input => (
-                <Input key={getInputKey(input.name)} {...input} />
+              {inputs.slice(4, 8).map(input => (
+                <Input
+                  key={getInputKey(input.name)}
+                  {...input}
+                  invalid={getFieldState(input.name).invalid}
+                  containerStyle="w-1/4"
+                />
               ))}
             </div>
 
             <div className="flex flex-row mt-[60px] gap-[30px] w-full">
               {inputs.slice(8, 9).map(input => (
-                <Input key={getInputKey(input.name)} {...input} />
+                <Input
+                  key={getInputKey(input.name)}
+                  {...input}
+                  invalid={getFieldState(input.name).invalid}
+                />
               ))}
             </div>
           </div>
