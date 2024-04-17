@@ -126,5 +126,5 @@ export const MOCK_USER = {
   address: createMockAddress(),
   email: faker.internet.email(),
   name: faker.person.firstName(),
-  phone: faker.phone.number('##########'),
+  phone: faker.string.numeric({ length: { min: 10, max: 11 } }),
 } satisfies User

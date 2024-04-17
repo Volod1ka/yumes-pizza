@@ -39,7 +39,7 @@ const CartPage = () => {
     handleSubmit,
     formState: { isValid },
     reset,
-    getFieldState,
+    hasInvalideField,
   } = useCartForm({
     name: AUTH_USER ? MOCK_USER.name : undefined,
     phone: AUTH_USER ? MOCK_USER.phone : undefined,
@@ -228,7 +228,7 @@ const CartPage = () => {
                 key={getInputKey(input.name)}
                 {...input}
                 required
-                invalid={getFieldState(input.name).invalid}
+                invalid={hasInvalideField(input.name)}
               />
             ))}
           </div>
@@ -238,7 +238,7 @@ const CartPage = () => {
                 <Input
                   key={getInputKey(input.name)}
                   {...input}
-                  invalid={getFieldState(input.name).invalid}
+                  invalid={hasInvalideField(input.name)}
                 />
               ))}
             </div>
@@ -247,7 +247,7 @@ const CartPage = () => {
                 <Input
                   key={getInputKey(input.name)}
                   {...input}
-                  invalid={getFieldState(input.name).invalid}
+                  invalid={hasInvalideField(input.name)}
                   containerStyle="w-1/4"
                 />
               ))}
@@ -258,7 +258,7 @@ const CartPage = () => {
                 <Input
                   key={getInputKey(input.name)}
                   {...input}
-                  invalid={getFieldState(input.name).invalid}
+                  invalid={hasInvalideField(input.name)}
                 />
               ))}
             </div>

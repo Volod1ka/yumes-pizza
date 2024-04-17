@@ -10,7 +10,8 @@ import {
   TEXT_WITHOUT_LONG_SPACE,
   TEXT_WITHOUT_WHITESPACE,
 } from '@tools/regexp'
-import { useForm, type DefaultValues } from 'react-hook-form'
+import { get } from 'lodash'
+import { useForm, type DefaultValues, type FieldPath } from 'react-hook-form'
 import { z } from 'zod'
 
 const cartSchema = z.object({
@@ -45,7 +46,10 @@ const useCartForm = (defaultValues?: DefaultValues<CartForm>) => {
     delayError: 200,
   })
 
-  return form
+  const hasInvalideField = (name: FieldPath<CartForm>) =>
+    !!get(form.formState.errors, name, false)
+
+  return { ...form, hasInvalideField }
 }
 
 export default useCartForm
