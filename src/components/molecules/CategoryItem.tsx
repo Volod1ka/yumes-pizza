@@ -12,6 +12,7 @@ export const keyOfCategoryItem = (id: string) => `category-pill-${id}`
 export const сategoryItemStyle = (selected: boolean): ClassNameValue => [
   'py-[10px] px-3 rounded-[20px] text-dark_gray cursor-pointer list-none ease-out duration-300',
   selected && 'bg-dark_red text-white shadow-md-red',
+  'hover:scale-[1.15]',
 ]
 
 const CategoryItem = ({

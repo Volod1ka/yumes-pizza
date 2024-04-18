@@ -8,6 +8,9 @@ const ProfilePage = () => {
     return <Navigate to={NAVIGATION_ROUTES.signIn} replace />
   }
 
+  // TODO to check error handling (ErrorBoundary)
+  // throw new Error('h4lo')
+
   return <div>{`Profile Page: ${JSON.stringify(MOCK_USER)}`}</div>
 }
 
