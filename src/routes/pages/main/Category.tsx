@@ -1,5 +1,5 @@
+import { useGroupedProductsQuery } from '@api'
 import { ProductList } from '@components/organisms'
-import { MOCK_PRODUCT_WITH_CATEGORIES } from '@mocks'
 import type { Product } from '@models/products'
 import { NAVIGATION_ROUTES, type CategoryRouteParams } from '@routes/routes'
 import { addProduct, subProduct } from '@stores/features/cartSlice'
@@ -14,8 +14,10 @@ const CategoryPage = () => {
   const dispatch = useStoreDispatch()
   const cartProducts = useStoreSelector(state => state.cart.products)
 
+  const groupedProductsQuery = useGroupedProductsQuery()
+
   const products = useMemo(() => {
-    const category = MOCK_PRODUCT_WITH_CATEGORIES.find(
+    const category = groupedProductsQuery.groupedProducts.find(
       category => category.id === categoryId,
     )
 

@@ -1,6 +1,5 @@
-import { useNewsQuery } from '@api'
+import { useGroupedProductsQuery, useNewsQuery } from '@api'
 import { NewsSwiper, ProductList } from '@components/organisms'
-import { MOCK_PRODUCT_WITH_CATEGORIES } from '@mocks'
 import type { Product } from '@models/products'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import { addProduct, subProduct } from '@stores/features/cartSlice'
@@ -14,6 +13,7 @@ const HomePage = () => {
   const cartProducts = useStoreSelector(state => state.cart.products)
 
   const newsQuery = useNewsQuery()
+  const groupedProductsQuery = useGroupedProductsQuery()
 
   const navigateToCategory = (id: string) =>
     navigation(NAVIGATION_ROUTES.category(id))
@@ -31,7 +31,7 @@ const HomePage = () => {
       {newsQuery.news.length > 0 && <NewsSwiper news={newsQuery.news} />}
 
       <ProductList
-        data={MOCK_PRODUCT_WITH_CATEGORIES}
+        data={groupedProductsQuery.groupedProducts}
         selectedData={cartProducts}
         onPressMore={navigateToCategory}
         onAddProduct={onAddProduct}
