@@ -1,22 +1,37 @@
-import { userApi } from '.'
 import type { SignInForm, SignUpForm } from '@hooks/form'
+import type { User } from '@models/user'
+import { logoutUser, setUserData } from '@stores/features/userSlice'
 import { useStoreDispatch } from '@stores/store'
-import { setUserData, logoutUser } from '@stores/features/userSlice'
+import { useEffect } from 'react'
+import { userApi } from '.'
+
+export const STORAGE_KEY_USER = 'user_storage'
+
+const reg = async (user: SignUpForm) => {
+  return userApi.regUser(user)
+}
 
 const useUserQuery = () => {
   const dispatch = useStoreDispatch()
 
-  const reg = async (user: SignUpForm) => {
-    return await userApi.regUser(user)
-  }
+  useEffect(() => {
+    const localUser = localStorage.getItem(STORAGE_KEY_USER)
+
+    if (localUser) {
+      try {
+        const user = JSON.parse(localUser) as User
+
+        dispatch(setUserData({ user }))
+      } catch {}
+    }
+  }, [])
 
   const login = async (user: SignInForm) => {
     const result = await userApi.loginUser(user)
 
-    console.log(result.data.user)
-
     if (result.data.user) {
       dispatch(setUserData({ user: result.data.user }))
+      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(result.data.user))
     }
 
     return result
@@ -24,6 +39,7 @@ const useUserQuery = () => {
 
   const logout = () => {
     dispatch(logoutUser())
+    localStorage.removeItem(STORAGE_KEY_USER)
   }
 
   return { reg, login, logout }

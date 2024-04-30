@@ -12,9 +12,9 @@ export type LoginResultRequest = RegRequestResult & {
 }
 
 export const regUser = async (user: SignUpForm) => {
-  return await httpClient.post<RegRequestResult>('user-reg', { ...user })
+  return httpClient.post<RegRequestResult>('user-reg', { ...user })
 }
 
 export const loginUser = async (user: SignInForm) => {
-  return await httpClient.post<LoginResultRequest>('user-login', { ...user })
+  return httpClient.post<LoginResultRequest>('user-login', { ...user })
 }
