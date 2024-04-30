@@ -1,8 +1,6 @@
 import { CartButton, IconButton } from '@components/molecules/buttons'
-import { MOCK_USER } from '@mocks'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import { useStoreSelector } from '@stores/store'
-import { AUTH_USER } from '@tools/common'
 import { NavLink } from 'react-router-dom'
 
 export const setNavStateStyle = (isActive: boolean) =>
@@ -10,6 +8,8 @@ export const setNavStateStyle = (isActive: boolean) =>
 
 const Header = () => {
   const { products, totalPrice } = useStoreSelector(state => state.cart)
+
+  const user = useStoreSelector(store => store.user.user)
 
   return (
     <header className="sticky top-0 z-50">
@@ -41,7 +41,7 @@ const Header = () => {
                 icon="UserIcon"
                 className={setNavStateStyle(isActive)}
                 // TODO
-                label={AUTH_USER ? MOCK_USER.name : undefined}
+                label={user?.name}
               />
             )}
           </NavLink>

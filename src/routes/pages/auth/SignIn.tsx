@@ -1,10 +1,11 @@
+import { useUserQuery } from '@api'
 import { Button, TextButton } from '@components/molecules/buttons'
 import { Input, type InputProps } from '@components/molecules/form'
 import { getInputKey } from '@components/molecules/form/Input'
 import { AuthLayout } from '@components/templates'
 import { useSignInForm } from '@hooks/form'
 import { NAVIGATION_ROUTES } from '@routes/routes'
-import { AUTH_USER } from '@tools/common'
+import { useStoreSelector } from '@stores/store'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 const onClickForgotPassword = () => {}
@@ -19,8 +20,11 @@ const SignInPage = () => {
     hasInvalideField,
   } = useSignInForm()
 
-  // TODO
-  if (AUTH_USER) {
+  const user = useStoreSelector(store => store.user.user)
+
+  const { login } = useUserQuery()
+
+  if (user) {
     return <Navigate to={NAVIGATION_ROUTES.profile} replace />
   }
 
@@ -29,8 +33,13 @@ const SignInPage = () => {
       return
     }
 
-    // TODO
-    console.log(JSON.stringify({ data }))
+    const req = await login(data)
+
+    alert(req.data.message)
+
+    if (req.data.success) {
+      navigation(NAVIGATION_ROUTES.home, { replace: true })
+    }
   })
 
   const inputs = [

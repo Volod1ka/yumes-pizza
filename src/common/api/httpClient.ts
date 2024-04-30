@@ -3,7 +3,8 @@ import qs from 'qs'
 import applyLoggerInterceptor from './interceptors/logger'
 
 const httpClient = axios.create({
-  baseURL: 'http://192.168.0.193:3001/api/',
+  baseURL: 'http://localhost:3001/api/',
+  withCredentials: true,
   paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
 })
 

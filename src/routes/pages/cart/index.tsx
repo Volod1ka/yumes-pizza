@@ -11,7 +11,6 @@ import { getInputKey } from '@components/molecules/form/Input'
 import { getRadioButtonKey } from '@components/molecules/form/RadioButton'
 import { CartItem } from '@components/organisms'
 import { useCartForm } from '@hooks/form'
-import { MOCK_USER } from '@mocks'
 import type { Order, OrderProducts } from '@models/order'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
@@ -21,7 +20,6 @@ import {
   subProduct,
 } from '@stores/features/cartSlice'
 import { useStoreDispatch, useStoreSelector } from '@stores/store'
-import { AUTH_USER } from '@tools/common'
 import { useNavigate } from 'react-router-dom'
 import CartEmptyPage from './CartEmpty'
 import { ORDER_ID } from './OrderCheckouted'
@@ -30,8 +28,8 @@ const CartPage = () => {
   const navigation = useNavigate()
 
   const dispatch = useStoreDispatch()
-  const { products, totalPrice, discount } = useStoreSelector(
-    state => state.cart,
+  const { user, products, totalPrice, discount } = useStoreSelector(
+    ({ cart, user: { user } }) => ({ ...cart, user }),
   )
 
   const {
@@ -41,15 +39,15 @@ const CartPage = () => {
     reset,
     hasInvalideField,
   } = useCartForm({
-    name: AUTH_USER ? MOCK_USER.name : undefined,
-    phone: AUTH_USER ? MOCK_USER.phone : undefined,
+    name: user?.name,
+    phone: user?.phone,
     address: {
-      street: AUTH_USER ? MOCK_USER.address.street : undefined,
-      building: AUTH_USER ? MOCK_USER.address.building : undefined,
-      appart: AUTH_USER ? MOCK_USER.address.appart ?? undefined : undefined,
-      entrance: AUTH_USER ? MOCK_USER.address.entrance ?? undefined : undefined,
-      floor: AUTH_USER ? MOCK_USER.address.floor ?? undefined : undefined,
-      intercom: AUTH_USER ? MOCK_USER.address.intercom ?? undefined : undefined,
+      street: user?.address?.street,
+      building: user?.address?.building,
+      appart: user?.address?.appart ?? undefined,
+      entrance: user?.address?.entrance ?? undefined,
+      floor: user?.address?.floor ?? undefined,
+      intercom: user?.address?.intercom ?? undefined,
     },
   })
 
@@ -219,7 +217,7 @@ const CartPage = () => {
             titleAlign="left"
             right={
               // TODO
-              AUTH_USER
+              user
                 ? undefined
                 : {
                     className:

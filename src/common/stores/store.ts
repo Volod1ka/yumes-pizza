@@ -5,10 +5,12 @@ import {
   type TypedUseSelectorHook,
 } from 'react-redux'
 import cartSlice from './features/cartSlice'
+import userSlice from './features/userSlice'
 
 const store = configureStore({
   reducer: combineReducers({
     cart: cartSlice,
+    user: userSlice,
   }),
 })
 

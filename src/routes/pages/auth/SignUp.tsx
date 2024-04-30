@@ -1,11 +1,11 @@
-import httpClient from '@api/httpClient'
+import { useUserQuery } from '@api'
 import { Button } from '@components/molecules/buttons'
 import { Input, type InputProps } from '@components/molecules/form'
 import { getInputKey } from '@components/molecules/form/Input'
 import { AuthLayout } from '@components/templates'
 import { useSignUpForm } from '@hooks/form'
 import { NAVIGATION_ROUTES } from '@routes/routes'
-import { AUTH_USER } from '@tools/common'
+import { useStoreSelector } from '@stores/store'
 import { Navigate } from 'react-router-dom'
 
 const SignUpPage = () => {
@@ -14,10 +14,14 @@ const SignUpPage = () => {
     handleSubmit,
     formState: { isValid },
     hasInvalideField,
+    reset,
   } = useSignUpForm()
 
-  // TODO
-  if (AUTH_USER) {
+  const user = useStoreSelector(store => store.user.user)
+
+  const { reg } = useUserQuery()
+
+  if (user) {
     return <Navigate to={NAVIGATION_ROUTES.profile} replace />
   }
 
@@ -26,9 +30,12 @@ const SignUpPage = () => {
       return
     }
 
-    const req = await httpClient.post('user-reg', null, { params: data })
-    if (req.data) {
-      alert('reg!')
+    const req = await reg(data)
+
+    alert(req.data.message)
+
+    if (req.data.success) {
+      reset()
     }
   })
 
