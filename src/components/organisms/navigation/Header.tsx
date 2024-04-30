@@ -40,7 +40,6 @@ const Header = () => {
               <IconButton
                 icon="UserIcon"
                 className={setNavStateStyle(isActive)}
-                // TODO
                 label={user?.name}
               />
             )}

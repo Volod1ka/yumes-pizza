@@ -3,7 +3,7 @@ import { Button } from '@components/molecules/buttons'
 import { NAVIGATION_ROUTES, type OrderCheckoutedParams } from '@routes/routes'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-// TODO remove
+// TODO: remove
 export const ORDER_ID: string = '1234'
 
 const OrderCheckoutedPage = () => {

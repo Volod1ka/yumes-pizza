@@ -17,15 +17,29 @@ export type RecipientData = {
   payment: Payment
 }
 
-export type OrderProducts = {
+export type OrderProduct = {
   id: string
   count: number
   price: number
 }
 
+export type HistoryOrderProduct = {
+  id: string
+  name: string
+  image: string
+  count: number
+  price: number
+}
+
 export type Order = RecipientData & {
-  id?: string
-  products: OrderProducts[]
+  id?: number
+  products: OrderProduct[]
   totalPrice: number
   discount: number
+}
+
+export type HistoryOrder = Pick<Order, 'totalPrice'> & {
+  id: number
+  date: string
+  products: HistoryOrderProduct[]
 }

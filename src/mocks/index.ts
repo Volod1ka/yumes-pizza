@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import type { News } from '@models/news'
-import type { Address } from '@models/order'
+import type { Address, HistoryOrder } from '@models/order'
 import type {
   Category,
   GroupedProducts,
@@ -8,6 +8,7 @@ import type {
   Product,
 } from '@models/products'
 import type { User } from '@models/user'
+import { subMonths } from 'date-fns'
 
 export const createMockProduct = (): Product => {
   const isSale = !faker.number.int({ min: 0, max: 5 })
@@ -44,6 +45,33 @@ export const createMockAddress = (): Address => {
     floor: null,
     intercom: null,
     street: faker.location.street(),
+  }
+}
+
+export const createMockOrder = (): HistoryOrder => {
+  const products = faker.helpers.multiple(createMockProduct, {
+    count: faker.number.int({ min: 1, max: 8 }),
+  })
+  const totalPrice = products.reduce((accumulator, { price }) => {
+    return accumulator + (price.selling ?? price.full)
+  }, 0)
+
+  return {
+    id: faker.number.int({ min: 1 }),
+    date: faker.date
+      .between({
+        from: subMonths(new Date(), faker.number.int({ min: 1, max: 12 })),
+        to: new Date(),
+      })
+      .toISOString(),
+    products: products.map(({ id, image, name, price }) => ({
+      count: faker.number.int({ min: 1, max: 12 }),
+      id,
+      image,
+      name,
+      price: price.selling ?? price.full,
+    })),
+    totalPrice,
   }
 }
 
@@ -128,3 +156,7 @@ export const MOCK_USER = {
   name: faker.person.firstName(),
   phone: faker.string.numeric({ length: { min: 10, max: 11 } }),
 } satisfies User
+
+export const MOCK_HISTORY_ORDERS = faker.helpers.multiple(createMockOrder, {
+  count: faker.number.int({ min: 1, max: 10 }),
+}) satisfies HistoryOrder[]

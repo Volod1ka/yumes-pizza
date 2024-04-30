@@ -11,7 +11,7 @@ import { getInputKey } from '@components/molecules/form/Input'
 import { getRadioButtonKey } from '@components/molecules/form/RadioButton'
 import { CartItem } from '@components/organisms'
 import { useCartForm } from '@hooks/form'
-import type { Order, OrderProducts } from '@models/order'
+import type { Order, OrderProduct } from '@models/order'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
   addCartProduct,
@@ -71,20 +71,20 @@ const CartPage = () => {
     dispatch(removeProduct({ productId }))
   }
 
-  // TODO in progress
+  // TODO: in progress
   const onSubmitOrder = handleSubmit(
     async ({ address, details, name, payment, phone }) => {
       if (!isValid) {
         return
       }
 
-      const orderProducts: OrderProducts[] = products.map(
+      const orderProducts: OrderProduct[] = products.map(
         ({ id, count, price }) => ({
           id,
           count,
           price: (price.selling ?? price.full) * count,
         }),
-      )
+      ) satisfies OrderProduct[]
 
       const newOrder: Order = {
         products: orderProducts,
@@ -104,7 +104,7 @@ const CartPage = () => {
         payment,
       }
 
-      // TODO remove this later
+      // TODO: remove this later
       console.log(JSON.stringify({ newOrder }))
 
       clearCartOfProducts()
@@ -216,7 +216,6 @@ const CartPage = () => {
             title="Recipient data"
             titleAlign="left"
             right={
-              // TODO
               user
                 ? undefined
                 : {

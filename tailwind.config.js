@@ -35,7 +35,7 @@ module.exports = {
       heading2: ['28px', { lineHeight: '32px' }],
       heading1: ['32px', { lineHeight: '36px' }],
     },
-    // TODO maybe create stack of screens size
+    // TODO: maybe create stack of screens size
     // screens: {
     //   phone: '480px',
     //   tablet: '768px',
