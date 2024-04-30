@@ -1,3 +1,4 @@
+import httpClient from '@api/httpClient'
 import { Button } from '@components/molecules/buttons'
 import { Input, type InputProps } from '@components/molecules/form'
 import { getInputKey } from '@components/molecules/form/Input'
@@ -25,8 +26,10 @@ const SignUpPage = () => {
       return
     }
 
-    // TODO
-    console.log(JSON.stringify({ data }))
+    const req = await httpClient.post('user-reg', null, { params: data })
+    if (req.data) {
+      alert('reg!')
+    }
   })
 
   const inputs = [

@@ -24,7 +24,7 @@ const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <div className={twMerge('flex flex-col min-w-[230px]', className)}>
-      <div className="relative mb-5 rounded-[20px] overflow-hidden">
+      <div className="relative mb-5 max-h-[230px] rounded-[20px] overflow-hidden">
         <img className="object-cover" src={image} alt={name} />
 
         {price.discount && (
