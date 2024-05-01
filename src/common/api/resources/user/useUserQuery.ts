@@ -8,8 +8,8 @@ import { userApi } from '.'
 
 export const STORAGE_KEY_USER = 'user_storage'
 
-const reg = async (user: SignUpForm) => {
-  return userApi.regUser(user)
+const registration = async (user: SignUpForm) => {
+  return userApi.registrationUser(user)
 }
 
 const useUserQuery = () => {
@@ -44,7 +44,7 @@ const useUserQuery = () => {
     localStorage.removeItem(STORAGE_KEY_USER)
   }
 
-  return { reg, login, logout }
+  return { registration, login, logout }
 }
 
 export default useUserQuery

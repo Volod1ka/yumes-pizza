@@ -1,3 +1,4 @@
+import type { RequestResult } from './requests'
 import type { User } from './user'
 
 export type Payment = 'cash' | 'terminal'
@@ -44,4 +45,8 @@ export type HistoryOrder = Pick<Order, 'totalPrice'> & {
   id: number
   date: string
   products: HistoryOrderProduct[]
+}
+
+export type CreateOrderResponse = RequestResult & {
+  id: HistoryOrder['id'] | null
 }

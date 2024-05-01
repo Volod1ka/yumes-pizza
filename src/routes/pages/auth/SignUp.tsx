@@ -19,7 +19,7 @@ const SignUpPage = () => {
 
   const user = useStoreSelector(store => store.user.user)
 
-  const { reg } = useUserQuery()
+  const { registration } = useUserQuery()
 
   if (user) {
     return <Navigate to={NAVIGATION_ROUTES.profile} replace />
@@ -30,7 +30,7 @@ const SignUpPage = () => {
       return
     }
 
-    const req = await reg(data)
+    const req = await registration(data)
 
     alert(req.data.message)
 

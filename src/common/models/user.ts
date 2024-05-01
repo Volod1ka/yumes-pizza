@@ -1,4 +1,5 @@
 import type { Address } from './order'
+import type { RequestResultWithSuccess } from './requests'
 
 export type User = {
   id: string
@@ -7,3 +8,9 @@ export type User = {
   email: string
   address: Address
 }
+
+export type LoginResponse = RequestResultWithSuccess & {
+  user?: User
+}
+
+export type RegistrationResponse = RequestResultWithSuccess

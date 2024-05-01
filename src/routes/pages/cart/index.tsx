@@ -106,13 +106,14 @@ const CartPage = () => {
         payment,
       }
 
-      const orderNumber = await orderQuery.createOrder(newOrder)
+      const request = await orderQuery.createOrder(newOrder)
 
-      if (!orderNumber) {
+      if (!request.id) {
+        alert(request.message)
         return
       }
 
-      await orderQuery.checkoutOrder(orderNumber)
+      await orderQuery.checkoutOrder(request.id)
 
       clearCartOfProducts()
       reset()

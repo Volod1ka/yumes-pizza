@@ -1,20 +1,11 @@
 import httpClient from '@api/httpClient'
 import type { SignInForm, SignUpForm } from '@hooks/form'
-import type { User } from '@models/user'
+import type { LoginResponse, RegistrationResponse } from '@models/user'
 
-export type RegRequestResult = {
-  success: boolean
-  message: string
-}
-
-export type LoginResultRequest = RegRequestResult & {
-  user?: User
-}
-
-export const regUser = async (user: SignUpForm) => {
-  return httpClient.post<RegRequestResult>('user-reg', { ...user })
+export const registrationUser = async (user: SignUpForm) => {
+  return httpClient.post<RegistrationResponse>('user-reg', { ...user })
 }
 
 export const loginUser = async (user: SignInForm) => {
-  return httpClient.post<LoginResultRequest>('user-login', { ...user })
+  return httpClient.post<LoginResponse>('user-login', { ...user })
 }
