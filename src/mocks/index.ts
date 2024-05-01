@@ -160,3 +160,5 @@ export const MOCK_USER = {
 export const MOCK_HISTORY_ORDERS = faker.helpers.multiple(createMockOrder, {
   count: faker.number.int({ min: 1, max: 10 }),
 }) satisfies HistoryOrder[]
+
+export const MOCK_ORDER_ID: HistoryOrder['id'] = faker.number.int({ min: 1 })
