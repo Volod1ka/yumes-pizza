@@ -1,4 +1,4 @@
-import { useOrderQuery } from '@api'
+import { useOrderQuery, useUserQuery } from '@api'
 import { Price } from '@components/atoms'
 import { CategoryLine } from '@components/molecules'
 import { Button } from '@components/molecules/buttons'
@@ -12,7 +12,7 @@ import { getInputKey } from '@components/molecules/form/Input'
 import { getRadioButtonKey } from '@components/molecules/form/RadioButton'
 import { CartItem } from '@components/organisms'
 import { useCartForm } from '@hooks/form'
-import type { Order, OrderProduct } from '@models/order'
+import type { Address, Order, OrderProduct } from '@models/order'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import {
   addCartProduct,
@@ -32,7 +32,8 @@ const CartPage = () => {
     ({ cart, user: { user } }) => ({ ...cart, user }),
   )
 
-  const orderQuery = useOrderQuery()
+  const { updateUser } = useUserQuery()
+  const orderQuery = useOrderQuery(false)
 
   const {
     register,
@@ -87,6 +88,15 @@ const CartPage = () => {
         }),
       ) satisfies OrderProduct[]
 
+      const newAddress: Address = {
+        appart: address.appart || null,
+        building: address.building,
+        entrance: address.entrance || null,
+        floor: address.floor || null,
+        intercom: address.intercom || null,
+        street: address.street,
+      } satisfies Address
+
       const newOrder: Order = {
         products: orderProducts,
         totalPrice,
@@ -95,14 +105,7 @@ const CartPage = () => {
         name,
         phone,
         details: details || null,
-        address: {
-          appart: address.appart || null,
-          building: address.building,
-          entrance: address.entrance || null,
-          floor: address.floor || null,
-          intercom: address.intercom || null,
-          street: address.street,
-        },
+        address: newAddress,
         payment,
       }
 
@@ -114,6 +117,10 @@ const CartPage = () => {
       }
 
       await orderQuery.checkoutOrder(request.id)
+
+      if (user) {
+        updateUser({ ...user, address })
+      }
 
       clearCartOfProducts()
       reset()

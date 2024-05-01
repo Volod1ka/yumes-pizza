@@ -1,4 +1,4 @@
-import { useUserQuery } from '@api'
+import { useOrderQuery, useUserQuery } from '@api'
 import { CategoryLine } from '@components/molecules'
 import { OrderHistoryList } from '@components/organisms'
 import { NAVIGATION_ROUTES } from '@routes/routes'
@@ -6,11 +6,12 @@ import { useStoreSelector } from '@stores/store'
 import { Navigate } from 'react-router-dom'
 
 const ProfilePage = () => {
-  const { logout } = useUserQuery()
-  const { user, orders } = useStoreSelector(store => ({
+  const { user } = useStoreSelector(store => ({
     user: store.user.user,
-    orders: store.order.orders,
   }))
+
+  const { orders } = useOrderQuery()
+  const { logout } = useUserQuery()
 
   if (!user) {
     return <Navigate to={NAVIGATION_ROUTES.signIn} replace />

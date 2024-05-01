@@ -67,7 +67,7 @@ const OrderHistoryItem = ({
                 <p className="text-heading6 text-dark_gray font-bold line-clamp-2">
                   {name}
                 </p>
-                <Price label={`${count} x `} price={price} />
+                <Price label={`x${count} `} price={price} />
               </div>
             </div>
           ))}

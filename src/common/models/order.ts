@@ -42,7 +42,7 @@ export type Order = RecipientData & {
 }
 
 export type HistoryOrder = Pick<Order, 'totalPrice'> & {
-  id: number
+  id: string
   date: string
   products: HistoryOrderProduct[]
 }

@@ -31,11 +31,15 @@ const useUserQuery = () => {
     const result = await userApi.loginUser(user)
 
     if (result.data.user) {
-      dispatch(setUserData({ user: result.data.user }))
-      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(result.data.user))
+      updateUser(result.data.user)
     }
 
     return result
+  }
+
+  const updateUser = (user: User) => {
+    dispatch(setUserData({ user }))
+    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(user))
   }
 
   const logout = () => {
@@ -44,7 +48,7 @@ const useUserQuery = () => {
     localStorage.removeItem(STORAGE_KEY_USER)
   }
 
-  return { registration, login, logout }
+  return { registration, login, logout, updateUser }
 }
 
 export default useUserQuery

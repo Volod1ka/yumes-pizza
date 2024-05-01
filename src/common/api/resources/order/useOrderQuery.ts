@@ -8,14 +8,17 @@ const createOrder = async (order: Order) => {
   return orderApi.createOrder(order)
 }
 
-const useOrderQuery = () => {
+const useOrderQuery = (update: boolean = true) => {
   const dispatch = useStoreDispatch()
-  const { user } = useStoreSelector(store => ({
+  const { user, orders } = useStoreSelector(store => ({
     user: store.user.user,
+    orders: store.order.orders,
   }))
 
   useEffect(() => {
-    updateOrders()
+    if (update) {
+      updateOrders()
+    }
   }, [JSON.stringify(user)])
 
   const updateOrders = async () => {
@@ -34,7 +37,7 @@ const useOrderQuery = () => {
     await dispatch(setCheckoutedOrder({ id }))
   }
 
-  return { createOrder, updateOrders, checkoutOrder }
+  return { createOrder, updateOrders, checkoutOrder, orders }
 }
 
 export default useOrderQuery

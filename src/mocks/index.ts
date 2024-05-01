@@ -57,7 +57,7 @@ export const createMockOrder = (): HistoryOrder => {
   }, 0)
 
   return {
-    id: faker.number.int({ min: 1 }),
+    id: faker.string.uuid(),
     date: faker.date
       .between({
         from: subMonths(new Date(), faker.number.int({ min: 1, max: 12 })),
@@ -161,4 +161,4 @@ export const MOCK_HISTORY_ORDERS = faker.helpers.multiple(createMockOrder, {
   count: faker.number.int({ min: 1, max: 10 }),
 }) satisfies HistoryOrder[]
 
-export const MOCK_ORDER_ID: HistoryOrder['id'] = faker.number.int({ min: 1 })
+export const MOCK_ORDER_ID: HistoryOrder['id'] = faker.string.uuid()
