@@ -1,3 +1,4 @@
+import { useOrderQuery } from '@api'
 import { Price } from '@components/atoms'
 import { CategoryLine } from '@components/molecules'
 import { Button } from '@components/molecules/buttons'
@@ -22,7 +23,6 @@ import {
 import { useStoreDispatch, useStoreSelector } from '@stores/store'
 import { useNavigate } from 'react-router-dom'
 import CartEmptyPage from './CartEmpty'
-import { ORDER_ID } from './OrderCheckouted'
 
 const CartPage = () => {
   const navigation = useNavigate()
@@ -31,6 +31,8 @@ const CartPage = () => {
   const { user, products, totalPrice, discount } = useStoreSelector(
     ({ cart, user: { user } }) => ({ ...cart, user }),
   )
+
+  const orderQuery = useOrderQuery()
 
   const {
     register,
@@ -71,7 +73,6 @@ const CartPage = () => {
     dispatch(removeProduct({ productId }))
   }
 
-  // TODO: in progress
   const onSubmitOrder = handleSubmit(
     async ({ address, details, name, payment, phone }) => {
       if (!isValid) {
@@ -90,6 +91,7 @@ const CartPage = () => {
         products: orderProducts,
         totalPrice,
         discount,
+        id_user: user?.id ?? null,
         name,
         phone,
         details: details || null,
@@ -104,13 +106,18 @@ const CartPage = () => {
         payment,
       }
 
-      // TODO: remove this later
-      console.log(JSON.stringify({ newOrder }))
+      const orderNumber = await orderQuery.createOrder(newOrder)
+
+      if (!orderNumber) {
+        return
+      }
+
+      await orderQuery.checkoutOrder(orderNumber)
 
       clearCartOfProducts()
       reset()
 
-      navigation(NAVIGATION_ROUTES.orderCheckouted(ORDER_ID), { replace: true })
+      await navigation(NAVIGATION_ROUTES.orderCheckouted, { replace: true })
     },
   )
 

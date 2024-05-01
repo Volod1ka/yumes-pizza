@@ -32,7 +32,7 @@ const routersFromElements = createRoutesFromElements(
     <Route path={NAVIGATION_ROUTES.signUp} element={<SignUpPage />} />
     <Route path={NAVIGATION_ROUTES.cart} element={<CartPage />} />
     <Route
-      path={NAVIGATION_ROUTES.orderCheckouted()}
+      path={NAVIGATION_ROUTES.orderCheckouted}
       element={<OrderCheckoutedPage />}
     />
     <Route path={NAVIGATION_ROUTES.profile} element={<ProfilePage />} />

@@ -1,3 +1,5 @@
+import type { User } from './user'
+
 export type Payment = 'cash' | 'terminal'
 
 export type Address = {
@@ -32,7 +34,7 @@ export type HistoryOrderProduct = {
 }
 
 export type Order = RecipientData & {
-  id?: number
+  id_user: User['id'] | null
   products: OrderProduct[]
   totalPrice: number
   discount: number

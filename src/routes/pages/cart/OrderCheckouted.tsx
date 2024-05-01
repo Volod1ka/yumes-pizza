@@ -1,16 +1,15 @@
 import { Animation } from '@components/atoms'
 import { Button } from '@components/molecules/buttons'
-import { NAVIGATION_ROUTES, type OrderCheckoutedParams } from '@routes/routes'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
-
-// TODO: remove
-export const ORDER_ID: string = '1234'
+import { NAVIGATION_ROUTES } from '@routes/routes'
+import { useStoreSelector } from '@stores/store'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const OrderCheckoutedPage = () => {
   const navigation = useNavigate()
-  const { idOrder } = useParams<OrderCheckoutedParams>()
 
-  if (idOrder !== ORDER_ID) {
+  const orderId = useStoreSelector(store => store.order.checkoutedOrder)
+
+  if (!orderId) {
     return <Navigate to={NAVIGATION_ROUTES.cart} replace />
   }
 
@@ -24,7 +23,7 @@ const OrderCheckoutedPage = () => {
             Thank you for your purchase!
           </p>
           <p className="text-heading6 text-dark_gray text-center font-medium">
-            Your order # is: {idOrder}
+            Your order # is: {orderId}
           </p>
         </div>
 

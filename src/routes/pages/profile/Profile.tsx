@@ -1,14 +1,16 @@
 import { useUserQuery } from '@api'
 import { CategoryLine } from '@components/molecules'
 import { OrderHistoryList } from '@components/organisms'
-import { MOCK_HISTORY_ORDERS } from '@mocks'
 import { NAVIGATION_ROUTES } from '@routes/routes'
 import { useStoreSelector } from '@stores/store'
 import { Navigate } from 'react-router-dom'
 
 const ProfilePage = () => {
   const { logout } = useUserQuery()
-  const user = useStoreSelector(store => store.user.user)
+  const { user, orders } = useStoreSelector(store => ({
+    user: store.user.user,
+    orders: store.order.orders,
+  }))
 
   if (!user) {
     return <Navigate to={NAVIGATION_ROUTES.signIn} replace />
@@ -28,8 +30,7 @@ const ProfilePage = () => {
           onPress: logout,
         }}
       />
-      // TODO: remove mock
-      <OrderHistoryList data={MOCK_HISTORY_ORDERS} />
+      <OrderHistoryList data={orders} />
     </div>
   )
 }

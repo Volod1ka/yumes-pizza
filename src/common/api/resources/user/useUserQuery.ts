@@ -1,5 +1,6 @@
 import type { SignInForm, SignUpForm } from '@hooks/form'
 import type { User } from '@models/user'
+import { clearAll } from '@stores/features/orderSlice'
 import { logoutUser, setUserData } from '@stores/features/userSlice'
 import { useStoreDispatch } from '@stores/store'
 import { useEffect } from 'react'
@@ -39,6 +40,7 @@ const useUserQuery = () => {
 
   const logout = () => {
     dispatch(logoutUser())
+    dispatch(clearAll())
     localStorage.removeItem(STORAGE_KEY_USER)
   }
 

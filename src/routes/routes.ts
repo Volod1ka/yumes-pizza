@@ -10,10 +10,7 @@ export const NAVIGATION_ROUTES = {
   signUp: '/profile/signUp',
   // cart
   cart: '/cart',
-  orderCheckouted: (idOrder?: string) =>
-    typeof idOrder === 'string'
-      ? `/cart/${idOrder}/success`
-      : '/cart/:idOrder/success',
+  orderCheckouted: `/cart/checkout`,
   // profile
   profile: '/profile',
   // orderHistory: '/profile/history',
